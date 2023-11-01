@@ -1,4 +1,4 @@
-package com.example.sallerapp.controller.view;
+package com.example.du_an_1.controller.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.sallerapp.MainActivity;
-import com.example.sallerapp.R;
-import com.example.sallerapp.databinding.ActivityLoginBinding;
+import com.example.du_an_1.MainActivity;
+import com.example.du_an_1.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding loginBinding;
@@ -25,13 +24,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            }
-        });
-
-        loginBinding.btnLoginSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
         });
     }

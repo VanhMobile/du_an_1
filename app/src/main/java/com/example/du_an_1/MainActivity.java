@@ -1,16 +1,14 @@
-package com.example.sallerapp;
+package com.example.du_an_1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.MenuItem;
-
-import com.example.sallerapp.controller.fragment.Fragment_list_bill;
-import com.example.sallerapp.controller.fragment.HomeFragment;
-import com.example.sallerapp.controller.fragment.ListProductsFragment;
-import com.example.sallerapp.databinding.ActivityMainBinding;
-import com.example.sallerapp.funtions.MyFragment;
+import com.example.du_an_1.controller.fragment.Fragment_list_bill;
+import com.example.du_an_1.controller.fragment.HomeFragment;
+import com.example.du_an_1.controller.fragment.ListProductsFragment;
+import com.example.du_an_1.databinding.ActivityMainBinding;
+import com.example.du_an_1.funtions.MyFragment;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {

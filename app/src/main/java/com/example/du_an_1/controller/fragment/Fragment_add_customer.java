@@ -1,4 +1,4 @@
-package com.example.sallerapp.controller.fragment;
+package com.example.du_an_1.controller.fragment;
 
 import android.os.Bundle;
 
@@ -8,14 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.sallerapp.R;
+import com.example.du_an_1.R;
 
-public class DetailBillFragment extends Fragment {
+
+public class Fragment_add_customer extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_bill, container, false);
+        return inflater.inflate(R.layout.fragment_add_customer, container, false);
     }
 }

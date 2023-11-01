@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.sallerapp"
+    namespace = "com.example.du_an_1"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.sallerapp"
+        applicationId = "com.example.du_an_1"
         minSdk = 26
         targetSdk = 33
         versionCode = 1

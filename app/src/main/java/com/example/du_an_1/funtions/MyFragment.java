@@ -1,4 +1,4 @@
-package com.example.sallerapp.funtions;
+package com.example.du_an_1.funtions;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

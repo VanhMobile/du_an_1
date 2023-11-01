@@ -1,15 +1,14 @@
-package com.example.sallerapp.controller.view;
+package com.example.du_an_1.controller.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.sallerapp.R;
-import com.example.sallerapp.controller.fragment.AddProductFragment;
-import com.example.sallerapp.controller.fragment.CategoryProductFragment;
-import com.example.sallerapp.controller.fragment.CreateBillFragment;
-import com.example.sallerapp.funtions.MyFragment;
+import com.example.du_an_1.R;
+import com.example.du_an_1.controller.fragment.AddProductFragment;
+import com.example.du_an_1.controller.fragment.CategoryProductFragment;
+import com.example.du_an_1.funtions.MyFragment;
 
 public class ProductActivity extends AppCompatActivity {
     @Override
