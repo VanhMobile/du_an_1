@@ -1,16 +1,14 @@
-package com.example.sallerapp.controller.fragment;
+package com.example.du_an_1.controller.fragment;
 
 import android.os.Bundle;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.sallerapp.R;
-import com.example.sallerapp.databinding.FragmentListBillBinding;
+import com.example.du_an_1.databinding.FragmentListBillBinding;
 
 
 public class Fragment_list_bill extends Fragment {

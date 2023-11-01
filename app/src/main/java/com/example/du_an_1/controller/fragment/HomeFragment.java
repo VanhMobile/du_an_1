@@ -1,4 +1,4 @@
-package com.example.sallerapp.controller.fragment;
+package com.example.du_an_1.controller.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.sallerapp.controller.view.BillActivity;
-import com.example.sallerapp.controller.view.CustomerActivity;
-import com.example.sallerapp.controller.view.ProductActivity;
-import com.example.sallerapp.databinding.FragmentHomeBinding;
+import com.example.du_an_1.controller.view.BillActivity;
+import com.example.du_an_1.controller.view.CustomerActivity;
+import com.example.du_an_1.controller.view.ProductActivity;
+import com.example.du_an_1.databinding.FragmentHomeBinding;
 
 
 
@@ -56,14 +56,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(requireContext(), BillActivity.class));
-            }
-        });
-
-
-        homeBinding.shortcut.addEmployee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(requireContext(), EmployeeActivity.class));
             }
         });
 

@@ -1,6 +1,4 @@
-package com.example.sallerapp.controller.view;
-
-import static java.security.AccessController.getContext;
+package com.example.du_an_1.controller.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.sallerapp.R;
-import com.example.sallerapp.databinding.ActivityWellComeBinding;
+import com.example.du_an_1.databinding.ActivityWellComeBinding;
 
 public class WellComeActivity extends AppCompatActivity {
 

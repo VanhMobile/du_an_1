@@ -1,12 +1,12 @@
-package com.example.sallerapp.controller.view;
+package com.example.du_an_1.controller.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.sallerapp.R;
-import com.example.sallerapp.controller.fragment.Fragment_list_customers;
-import com.example.sallerapp.funtions.MyFragment;
+import com.example.du_an_1.R;
+import com.example.du_an_1.controller.fragment.Fragment_list_customers;
+import com.example.du_an_1.funtions.MyFragment;
 
 public class CustomerActivity extends AppCompatActivity {
 

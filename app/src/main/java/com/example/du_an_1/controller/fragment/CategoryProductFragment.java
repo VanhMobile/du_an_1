@@ -1,4 +1,4 @@
-package com.example.sallerapp.controller.fragment;
+package com.example.du_an_1.controller.fragment;
 
 import android.os.Bundle;
 
@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.sallerapp.R;
-import com.example.sallerapp.databinding.FragmentCategoryProductBinding;
-import com.example.sallerapp.funtions.MyFragment;
+import com.example.du_an_1.R;
+import com.example.du_an_1.databinding.FragmentCategoryProductBinding;
+import com.example.du_an_1.funtions.MyFragment;
 
 
 public class CategoryProductFragment extends Fragment {

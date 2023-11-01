@@ -1,4 +1,4 @@
-package com.example.sallerapp;
+package com.example.du_an_1;
 
 import android.content.Context;
 
