@@ -22,16 +22,13 @@
             android:name=".controller.view.ProductActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.view.WellComeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".controller.view.SignUpActivity"
+            android:name=".controller.view.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.view.LoginActivity"
+            android:name=".controller.view.WellComeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
