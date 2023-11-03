@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.example.du_an_1.controller.fragment.AccountFragment;
 import com.example.du_an_1.controller.fragment.Fragment_list_bill;
 import com.example.du_an_1.controller.fragment.HomeFragment;
 import com.example.du_an_1.controller.fragment.ListProductsFragment;
@@ -51,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
                             , new ListProductsFragment()
                             , false);
                 } else if (item.getItemId() == R.id.bottomNavAccount) {
-                    
+                    MyFragment.replaceFragment(MainActivity.this.getSupportFragmentManager()
+                            , R.id.fragmentContainer
+                            , new AccountFragment()
+                            , false);
                 }
                 return true;
             }
