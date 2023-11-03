@@ -30,6 +30,6 @@ public class WellComeActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 5000);
+        }, 3000);
     }
 }

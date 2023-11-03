@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_25sdp"
             android:fontFamily="@font/inter_bold"
-            android:text="Thông tin cửa hàng "
+            android:text="Thông tin nhân viên"
             android:textColor="@color/white"
             android:textSize="@dimen/_15ssp" />
 
