@@ -11,6 +11,7 @@ import com.example.du_an_1.controller.fragment.HomeFragment;
 import com.example.du_an_1.controller.fragment.ListProductsFragment;
 import com.example.du_an_1.databinding.ActivityMainBinding;
 import com.example.du_an_1.funtions.MyFragment;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
-
         initView();
+        MobileAds.initialize(this);
     }
 
     private void initView() {

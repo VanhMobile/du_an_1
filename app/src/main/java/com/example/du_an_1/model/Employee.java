@@ -9,16 +9,19 @@ public class Employee {
     private String password;
     private String idShop;
 
-    public Employee( String imgPath, String name, String idEmployee, String numberPhone, String address, String password, String idShop) {
-        this.imgPath = imgPath;
-        this.name = name;
-        this.idEmployee = idEmployee;
-        this.numberPhone = numberPhone;
-        this.address = address;
-        this.password = password;
-        this.idShop = idShop;
+    private String note;
+
+    public Employee(){
+
     }
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
     public String getName() {
         return name;
     }
@@ -33,10 +36,6 @@ public class Employee {
 
     public void setIdShop(String idShop) {
         this.idShop = idShop;
-    }
-
-    public Employee(){
-
     }
 
     public String getImgPath() {

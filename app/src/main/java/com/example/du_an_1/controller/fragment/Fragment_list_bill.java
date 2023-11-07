@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.example.du_an_1.controller.view.BillActivity;
 import com.example.du_an_1.databinding.FragmentListBillBinding;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 
 
 public class Fragment_list_bill extends Fragment {
@@ -26,6 +28,8 @@ public class Fragment_list_bill extends Fragment {
     }
 
     private void initView() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
         binding.btnAddBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

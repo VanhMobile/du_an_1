@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.example.du_an_1.R;
 import com.example.du_an_1.controller.view.ProductActivity;
 import com.example.du_an_1.databinding.FragmentListProductsBinding;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 
 public class ListProductsFragment extends Fragment {
 
@@ -38,6 +40,8 @@ public class ListProductsFragment extends Fragment {
     }
 
     private void initView() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        productsBinding.adView.loadAd(adRequest);
         productsBinding.btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

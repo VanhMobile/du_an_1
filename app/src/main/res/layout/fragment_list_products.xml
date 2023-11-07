@@ -66,14 +66,23 @@
         app:layout_constraintStart_toEndOf="@+id/tvFilter"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-5261855707351600/7577404430"
+        app:layout_constraintTop_toBottomOf="@+id/edtSearchProduct" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerListProducts"
-        android:padding="@dimen/_10sdp"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        tools:listitem="@layout/item_list_products"
+        android:padding="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSearchProduct" />
+        app:layout_constraintTop_toBottomOf="@+id/adView"
+        tools:listitem="@layout/item_list_products" />
 </androidx.constraintlayout.widget.ConstraintLayout>

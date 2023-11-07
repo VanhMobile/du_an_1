@@ -11,6 +11,8 @@ import com.example.du_an_1.R;
 import com.example.du_an_1.controller.view.CustomerActivity;
 import com.example.du_an_1.databinding.FragmentListCategoryCustomerBinding;
 import com.example.du_an_1.funtions.MyFragment;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 
 
 public class ListCategoryCustomerFragment extends Fragment {
@@ -38,6 +40,9 @@ public class ListCategoryCustomerFragment extends Fragment {
     }
 
     private void initView() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        customerBinding.adView.loadAd(adRequest);
         customerBinding.addCateCus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
