@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.example.du_an_1.R;
 import com.example.du_an_1.databinding.FragmentCategoryProductBinding;
 import com.example.du_an_1.funtions.MyFragment;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 
 
 public class CategoryProductFragment extends Fragment {
@@ -41,6 +43,8 @@ public class CategoryProductFragment extends Fragment {
     }
 
     private void initView() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        cateProBinding.adView.loadAd(adRequest);
         cateProBinding.addCatePro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

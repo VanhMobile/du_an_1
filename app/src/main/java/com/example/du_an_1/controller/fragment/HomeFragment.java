@@ -12,7 +12,12 @@ import android.view.ViewGroup;
 import com.example.du_an_1.controller.view.BillActivity;
 import com.example.du_an_1.controller.view.CustomerActivity;
 import com.example.du_an_1.controller.view.ProductActivity;
+import com.example.du_an_1.database.ProductDao;
 import com.example.du_an_1.databinding.FragmentHomeBinding;
+import com.example.du_an_1.funtions.RequestPermissions;
+import com.example.du_an_1.model.Product;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
 
 
 public class HomeFragment extends Fragment {
@@ -42,6 +47,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void initView() {
+        RequestPermissions.requestReadImgGalleryCamera(requireContext());
+        AdRequest adRequest = new AdRequest.Builder().build();
+        homeBinding.adView.loadAd(adRequest);
+        homeBinding.adView2.loadAd(adRequest);
         homeBinding.shortcut.btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
