@@ -17,10 +17,10 @@ public class EmployeeDao {
 
     private static String TAG = EmployeeDao.class.getSimpleName();
 
-    public static void getEmployees(String idShopAccount,GetData data){
+    public static void getEmployees(GetData data){
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         ArrayList<Employee> employees = new ArrayList<>();
-        db.child(idShopAccount).child("Employees").addListenerForSingleValueEvent(new ValueEventListener() {
+        db.child("EmployeeAccount").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
