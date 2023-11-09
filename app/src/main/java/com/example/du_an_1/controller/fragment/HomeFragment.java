@@ -14,6 +14,7 @@ import com.example.du_an_1.controller.view.CustomerActivity;
 import com.example.du_an_1.controller.view.ProductActivity;
 import com.example.du_an_1.database.ProductDao;
 import com.example.du_an_1.databinding.FragmentHomeBinding;
+import com.example.du_an_1.desgin_pattern.build_pantter.ProductBuilder;
 import com.example.du_an_1.funtions.RequestPermissions;
 import com.example.du_an_1.model.Product;
 import com.google.android.gms.ads.AdRequest;
@@ -47,6 +48,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void initView() {
+
+        Product product=new ProductBuilder()
+                .addId("SP1").addProductName("ThanhSp").build();
+        ProductDao.insertProduct(product, "Shop_1");
+
         RequestPermissions.requestReadImgGalleryCamera(requireContext());
         AdRequest adRequest = new AdRequest.Builder().build();
         homeBinding.adView.loadAd(adRequest);

@@ -3,7 +3,7 @@ package com.example.du_an_1.desgin_pattern.single_pantter;
 import com.example.du_an_1.model.Employee;
 
 public class AccountSingle {
-    private AccountSingle instance;
+    private static AccountSingle instance;
 
     private Employee account;
 
@@ -15,7 +15,7 @@ public class AccountSingle {
         this.account = account;
     }
 
-    public AccountSingle getInstance() {
+    public static AccountSingle getInstance() {
         if (instance == null){
             instance = new AccountSingle();
         }

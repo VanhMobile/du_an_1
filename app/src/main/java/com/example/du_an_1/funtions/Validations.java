@@ -2,12 +2,13 @@ package com.example.du_an_1.funtions;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 
-public class Validations {
+import kotlin.text.Regex;
 
-    private static final String REGEX_EMAIL = "[A-Za-z0-9]+@[a-zA-Z0-9]+(\\\\.[a-zA-Z0-9]+)";
-    private static final String REGEX_PHONE = "^\\+?[0-9]{10,13}$";
+
+public class Validations {
     private static final String REGEX_PASSWORD = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
 
 
@@ -59,7 +60,8 @@ public class Validations {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // nếu sai định dạng mail trả ra một error
-                if (!REGEX_EMAIL.matches(charSequence.toString())) {
+                Regex regex = new Regex("[A-Za-z0-9]+@[a-zA-Z0-9]+(\\\\.[a-zA-Z0-9]+)");
+                if (!regex.matches(charSequence.toString())) {
                     editText.setError("Sai định dạng email");
                 } else {
                     // nếu đúng hủy bỏ error
@@ -77,13 +79,14 @@ public class Validations {
     //check đnh dạng khi người dùng nhấn vào button
     public static boolean isEmailPress(EditText editText) {
         // check nếu edt chả ra giá trị sai định dạng thì chả ra error
-        if (!REGEX_EMAIL.matches(editText.getText().toString())) {
+        Regex regex = new Regex("[A-Za-z0-9]+@[a-zA-Z0-9]+(\\\\.[a-zA-Z0-9]+)");
+        if (!regex.matches(editText.getText().toString())) {
             editText.setError("Sai định dạng email");
         } else {
             // nếu đụng định dạng hủy bỏ error
             editText.setError(null);
         }
-        return REGEX_EMAIL.matches(editText.getText().toString());
+        return regex.matches(editText.getText().toString());
     }
 
     //check định dạng số điện thoại khi sự kiện onInput sảy ra
@@ -97,7 +100,8 @@ public class Validations {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // nếu sai định dạng phone trả ra một error
-                if (!REGEX_PHONE.matches(charSequence.toString())) {
+                Regex regex = new Regex("^\\+?[0-9]{10,13}$");
+                if (!regex.matches(charSequence.toString())) {
                     editText.setError("Sai định dạng số điện thoại");
                 } else {
                     // đúng hủy bỏ error
@@ -114,13 +118,14 @@ public class Validations {
 
     // check định dạng số điện thoại khi nhân sự kiện press
     public static boolean isPhoneNumberPress(EditText editText) {
-        if (!REGEX_PHONE.matches(editText.getText().toString())) {
+        Regex regex = new Regex("^\\+?[0-9]{10,13}$");
+        if (!regex.matches(editText.getText().toString())) {
             editText.setError("Sai định dạng số điện thoại");
         } else {
             // đúng hủy bỏ error
             editText.setError(null);
         }
-        return REGEX_PHONE.matches(editText.getText().toString());
+        return regex.matches(editText.getText().toString());
     }
 
     // check số lượng khi nhập
