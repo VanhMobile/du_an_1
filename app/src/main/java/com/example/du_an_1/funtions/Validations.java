@@ -4,6 +4,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+
 public class Validations {
 
     private static final String REGEX_EMAIL = "[A-Za-z0-9]+@[a-zA-Z0-9]+(\\\\.[a-zA-Z0-9]+)";
