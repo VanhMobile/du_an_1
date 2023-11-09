@@ -10,20 +10,21 @@ public class Product {
     private int retailPrice;
     private int wholeSalePrice;
     private int quantity;
+
+    private String cate;
     private String properties;
     private String date;
     private String note;
-    private ArrayList<String> listBill;
 
     public Product() {
     }
 
-    public ArrayList<String> getListBill() {
-        return listBill;
+    public String getCate() {
+        return cate;
     }
 
-    public void setListBill(ArrayList<String> listBill) {
-        this.listBill = listBill;
+    public void setCate(String cate) {
+        this.cate = cate;
     }
 
     public String getImgPath() {

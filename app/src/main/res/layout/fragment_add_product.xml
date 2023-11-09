@@ -31,7 +31,7 @@
             android:textSize="@dimen/_15ssp" />
 
         <ImageView
-            android:id="@+id/iconCartShopping"
+            android:id="@+id/imgSave"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_alignParentEnd="true"
@@ -48,6 +48,16 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:orientation="vertical">
+
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-5261855707351600/9062425237">
+            </com.google.android.gms.ads.AdView>
 
             <LinearLayout
                 android:id="@+id/addImgProduct"
@@ -98,6 +108,7 @@
                 android:id="@+id/edtProductId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -120,6 +131,7 @@
                 android:id="@+id/edtNameProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -142,6 +154,7 @@
                 android:id="@+id/edtProductCost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -164,6 +177,7 @@
                 android:id="@+id/edtRetailProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -186,6 +200,7 @@
                 android:id="@+id/edtWholeSalePriceProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -209,6 +224,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:maxLines="1"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/edt_add_product"
@@ -238,7 +254,7 @@
                 android:drawableEnd="@drawable/icon_triangle_down"
                 android:fontFamily="@font/inter_light"
                 android:padding="@dimen/_6sdp"
-                android:text="Hàng bán chạy"
+                android:text="Chọn loại hàng hóa"
                 android:textColor="@color/black" />
 
             <LinearLayout
@@ -284,11 +300,11 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recListAttPro"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:paddingHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     tools:listitem="@layout/item_attribute_product"
-                    />
+                    android:layout_height="@dimen/_90sdp"/>
+
             </LinearLayout>
 
             <TextView
@@ -303,6 +319,7 @@
                 android:textSize="@dimen/_10ssp" />
 
             <TextView
+                android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"

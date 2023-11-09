@@ -3,6 +3,10 @@ package com.example.du_an_1.desgin_pattern.build_pantter;
 import com.example.du_an_1.model.Product;
 
 public class ProductBuilder {
+
+    public ProductBuilder(){
+
+    }
     private Product product = new Product();
 
     public ProductBuilder addImgPath(String imgPath){
@@ -41,6 +45,11 @@ public class ProductBuilder {
 
     public ProductBuilder addAttribute(String attribute){
         product.setProperties(attribute);
+        return this;
+    }
+
+    public ProductBuilder addCategory(String cate){
+        product.setCate(cate);
         return this;
     }
 
