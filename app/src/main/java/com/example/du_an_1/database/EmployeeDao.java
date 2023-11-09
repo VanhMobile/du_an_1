@@ -16,9 +16,10 @@ import java.util.ArrayList;
 public class EmployeeDao {
 
     private static String TAG = EmployeeDao.class.getSimpleName();
-    private static ArrayList<Employee> employees = new ArrayList<>();
-    public static  ArrayList<Employee> getEmployees(String idShopAccount){
+
+    public static void getEmployees(String idShopAccount,GetData data){
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        ArrayList<Employee> employees = new ArrayList<>();
         db.child(idShopAccount).child("Employees").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -28,6 +29,7 @@ public class EmployeeDao {
                         employees.add(employee);
                         Log.e(TAG,employee.getIdEmployee());
                     }
+                    data.getData(employees);
                 }else{
                     Log.e(TAG,"không có dữ liệu trong Employees");
                 }
@@ -38,7 +40,9 @@ public class EmployeeDao {
                 Log.e(TAG,"ko thể đọc dữ liệu db: " + error);
             }
         });
+    }
 
-        return employees;
+    public interface GetData{
+        void getData(ArrayList<Employee> employees);
     }
 }

@@ -15,7 +15,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ProductDao {
-    private static ArrayList<Product> products = new ArrayList<>();
     private static String TAG = ProductDao.class.getSimpleName();
 
 
@@ -29,7 +28,8 @@ public class ProductDao {
     }
 
     // đọc dữ liệu sản phẩm của một xuống
-    public static ArrayList<Product> getProducts(String idShopAccount){
+    public static void getProducts(String idShopAccount, GetData data){
+        ArrayList<Product> products = new ArrayList<>();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         db.child(idShopAccount).child("Products").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -42,6 +42,7 @@ public class ProductDao {
                         products.add(product);
                         Log.e(TAG,product.getProductId());
                     }
+                    data.getData(products);
                 } else {
                     // snap ko có dữ liệu
                     Log.e(TAG,"Không có dữ liệu trong products");
@@ -55,8 +56,9 @@ public class ProductDao {
             }
         });
 
-        return products;
     }
 
-
+    public interface GetData{
+        void getData(ArrayList<Product> products);
+    }
 }
