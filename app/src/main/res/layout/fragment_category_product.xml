@@ -65,6 +65,7 @@
             ads:adUnitId="ca-app-pub-5261855707351600/7577404430"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvCatePro"
            android:paddingHorizontal="@dimen/_10sdp"
             tools:listitem="@layout/item_category_product"
             android:layout_width="match_parent"
