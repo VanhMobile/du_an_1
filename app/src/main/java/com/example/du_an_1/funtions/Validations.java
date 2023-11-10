@@ -9,8 +9,6 @@ import kotlin.text.Regex;
 
 
 public class Validations {
-    private static final String REGEX_PASSWORD = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
-
 
     // sử lý sự kiện khi người dùng đang nhập onInput
     public static void isEmpty(EditText editText) {
@@ -184,7 +182,8 @@ public class Validations {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (!REGEX_PASSWORD.matches(charSequence.toString())) {
+                Regex regex = new Regex("^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$");
+                if (!regex.matches(charSequence.toString())) {
                     editText.setError("Sai định dạng password");
                 } else {
                     editText.setError(null);
@@ -199,12 +198,13 @@ public class Validations {
     }
 
     public static boolean isPasswordPress(EditText editText){
-        if (!REGEX_PASSWORD.matches(editText.getText().toString())) {
+        Regex regex = new Regex("^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$");
+        if (!regex.matches(editText.getText().toString())) {
             editText.setError("Sai định dạng password");
         } else {
             editText.setError(null);
         }
-        return REGEX_PASSWORD.matches(editText.getText().toString());
+        return regex.matches(editText.getText().toString());
     }
 
 
