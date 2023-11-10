@@ -20,6 +20,7 @@ public class MyFragment {
                 .commit();
     }
 
+
     // trở lại fragment trước với một hiệu ứng
     public static void backFragment(FragmentManager fragmentManager
             , int containerId
