@@ -48,11 +48,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void initView() {
-
-        Product product=new ProductBuilder()
-                .addId("SP1").addProductName("ThanhSp").build();
-        ProductDao.insertProduct(product, "Shop_1");
-
         RequestPermissions.requestReadImgGalleryCamera(requireContext());
         AdRequest adRequest = new AdRequest.Builder().build();
         homeBinding.adView.loadAd(adRequest);

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/item_products"
     android:paddingBottom="@dimen/_10sdp">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -30,7 +31,7 @@
         app:layout_constraintStart_toEndOf="@+id/imgProduct" />
 
     <TextView
-        android:id="@+id/costProduct"
+        android:id="@+id/wholesalePrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Giá vốn: 30.000 đ"
@@ -46,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Số lượng: 3000"
-        app:layout_constraintTop_toBottomOf="@+id/costProduct"
+        app:layout_constraintTop_toBottomOf="@+id/wholesalePrice"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_3sdp"
         android:fontFamily="@font/inter_light"
@@ -54,6 +55,7 @@
         app:layout_constraintStart_toEndOf="@+id/imgProduct" />
 
     <ImageView
+        android:id="@+id/btnAddBill"
         android:layout_width="@dimen/_24sdp"
         android:layout_height="@dimen/_24sdp"
         android:src="@drawable/icon_cart_black"
