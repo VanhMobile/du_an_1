@@ -5,14 +5,17 @@ public class Employee {
     private String name;
     private String idEmployee;
     private String numberPhone;
-    private String address;
+    private String email;
     private String password;
     private String idShop;
-
     private String note;
 
-    public Employee(){
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNote() {
@@ -22,6 +25,7 @@ public class Employee {
     public void setNote(String note) {
         this.note = note;
     }
+
     public String getName() {
         return name;
     }
@@ -36,6 +40,10 @@ public class Employee {
 
     public void setIdShop(String idShop) {
         this.idShop = idShop;
+    }
+
+    public Employee(){
+
     }
 
     public String getImgPath() {
@@ -60,14 +68,6 @@ public class Employee {
 
     public void setNumberPhone(String numberPhone) {
         this.numberPhone = numberPhone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPassword() {
