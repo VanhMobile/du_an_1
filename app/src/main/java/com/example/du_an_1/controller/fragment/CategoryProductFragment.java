@@ -11,13 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.du_an_1.R;
-import com.example.du_an_1.controller.adapter.ListCategoryProductAdapter;
+import com.example.du_an_1.adapter.ListCategoryProductAdapter;
+import com.example.du_an_1.database.CategoryProductDao;
 import com.example.du_an_1.database.ProductDao;
 import com.example.du_an_1.databinding.FragmentCategoryProductBinding;
+import com.example.du_an_1.desgin_pattern.single_pantter.AccountSingle;
 import com.example.du_an_1.funtions.MyFragment;
+import com.example.du_an_1.model.CategoryProduct;
+import com.example.du_an_1.model.Employee;
 import com.example.du_an_1.model.Product;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 
@@ -61,14 +64,16 @@ public class CategoryProductFragment extends Fragment {
                 (cateProBinding.getRoot().getContext(), DividerItemDecoration.VERTICAL);
         cateProBinding.rcvCatePro.addItemDecoration(dividerItemDecoration);
 
-        ProductDao.getProducts("Shop_1", new ProductDao.GetData() {
+        AccountSingle accountSingle=AccountSingle.getInstance();
+        Employee employee= accountSingle.getAccount();
+        CategoryProductDao.getCategoryProduct(employee.getIdShop(), new CategoryProductDao.GetData() {
             @Override
-            public void getData(ArrayList<Product> products) {
+            public void getData(ArrayList<CategoryProduct> categoryProducts) {
                 if (adapter== null){
-                    adapter=new ListCategoryProductAdapter(products);
+                    adapter=new ListCategoryProductAdapter(categoryProducts);
                     cateProBinding.rcvCatePro.setAdapter(adapter);
                 }else {
-                    adapter.updateCatePro(products);
+                    adapter.updateCatePro(categoryProducts);
                 }
             }
         });

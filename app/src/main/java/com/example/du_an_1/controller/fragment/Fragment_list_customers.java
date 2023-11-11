@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.du_an_1.R;
-import com.example.du_an_1.controller.adapter.ListCustomerAdapter;
+import com.example.du_an_1.adapter.ListCustomerAdapter;
 import com.example.du_an_1.database.CustomerDao;
 import com.example.du_an_1.databinding.FragmentListCustomersBinding;
 import com.example.du_an_1.funtions.MyFragment;

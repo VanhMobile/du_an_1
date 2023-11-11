@@ -1,26 +1,26 @@
-package com.example.du_an_1.controller.adapter;
+package com.example.du_an_1.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.du_an_1.databinding.ItemCategoryCustomerBinding;
+import com.example.du_an_1.model.CategoryCustomer;
 import com.example.du_an_1.model.Customer;
 
 import java.util.ArrayList;
 
 public class ListCategoryCustomerAdapter extends RecyclerView.
         Adapter<ListCategoryCustomerAdapter.ListCategoryCustomerViewHolder>{
-    private ArrayList<Customer>listCus;
+    private ArrayList<CategoryCustomer>listCateCus=new ArrayList<>(o);
 
-    public ListCategoryCustomerAdapter(ArrayList<Customer> listCus) {
-        this.listCus = listCus;
+    public ListCategoryCustomerAdapter(ArrayList<CategoryCustomer> listCateCus) {
+        this.listCateCus = listCateCus;
     }
-    public void updateCategoryCus(ArrayList<Customer> newList){
-        this.listCus=newList;
+    public void updateCategoryCus(ArrayList<CategoryCustomer> newList){
+        this.listCateCus=newList;
         notifyDataSetChanged();
     }
 
@@ -34,17 +34,17 @@ public class ListCategoryCustomerAdapter extends RecyclerView.
 
     @Override
     public void onBindViewHolder(@NonNull ListCategoryCustomerViewHolder holder, int position) {
-        Customer customer=listCus.get(position);
-        if (customer== null){
+        CategoryCustomer categoryCustomer=listCateCus.get(position);
+        if (categoryCustomer== null){
             return;
         }
-        holder.binding.NameCategoryCustomer.setText(customer.getCustomerType());
+        holder.binding.NameCategoryCustomer.setText(categoryCustomer.getNameCategory());
     }
 
     @Override
     public int getItemCount() {
-        if (listCus!= null){
-            return listCus.size();
+        if (listCateCus != null){
+            return listCateCus.size();
         }
         return 0;
     }

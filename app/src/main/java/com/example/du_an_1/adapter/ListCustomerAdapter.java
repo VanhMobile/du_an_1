@@ -1,13 +1,11 @@
-package com.example.du_an_1.controller.adapter;
+package com.example.du_an_1.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.du_an_1.database.CustomerDao;
 import com.example.du_an_1.databinding.ItemListCustomerBinding;
 import com.example.du_an_1.model.Customer;
 

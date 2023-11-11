@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.du_an_1.R;
-import com.example.du_an_1.controller.adapter.ListCategoryCustomerAdapter;
-import com.example.du_an_1.controller.view.CustomerActivity;
+import com.example.du_an_1.adapter.ListCategoryCustomerAdapter;
+import com.example.du_an_1.database.CategoryCustomerDao;
 import com.example.du_an_1.database.CustomerDao;
 import com.example.du_an_1.databinding.FragmentListCategoryCustomerBinding;
+import com.example.du_an_1.desgin_pattern.single_pantter.AccountSingle;
 import com.example.du_an_1.funtions.MyFragment;
+import com.example.du_an_1.model.CategoryCustomer;
 import com.example.du_an_1.model.Customer;
+import com.example.du_an_1.model.Employee;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 
@@ -58,14 +60,17 @@ public class ListCategoryCustomerFragment extends Fragment {
         DividerItemDecoration dividerItemDecoration=new DividerItemDecoration
                 (customerBinding.getRoot().getContext(),DividerItemDecoration.VERTICAL);
         customerBinding.recListCategoryCus.addItemDecoration(dividerItemDecoration);
-        CustomerDao.getCustomers("Shop_1", new CustomerDao.GetData() {
+
+        AccountSingle accountSingle=AccountSingle.getInstance();
+        Employee employee= accountSingle.getAccount();
+        CategoryCustomerDao.getCategoryCustomers(employee.getIdShop(), new CategoryCustomerDao.GetData() {
             @Override
-            public void getData(ArrayList<Customer> customers) {
+            public void getData(ArrayList<CategoryCustomer> categoryCustomers) {
                 if (adapter== null){
-                    adapter=new ListCategoryCustomerAdapter(customers);
+                    adapter=new ListCategoryCustomerAdapter(categoryCustomers);
                     customerBinding.recListCategoryCus.setAdapter(adapter);
                 }else {
-                    adapter.updateCategoryCus(customers);
+                    adapter.updateCategoryCus(categoryCustomers);
                 }
             }
         });
