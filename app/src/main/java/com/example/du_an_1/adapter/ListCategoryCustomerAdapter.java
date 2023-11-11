@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class ListCategoryCustomerAdapter extends RecyclerView.
         Adapter<ListCategoryCustomerAdapter.ListCategoryCustomerViewHolder>{
-    private ArrayList<CategoryCustomer>listCateCus=new ArrayList<>(o);
+    private ArrayList<CategoryCustomer>listCateCus=new ArrayList<>();
 
     public ListCategoryCustomerAdapter(ArrayList<CategoryCustomer> listCateCus) {
         this.listCateCus = listCateCus;
