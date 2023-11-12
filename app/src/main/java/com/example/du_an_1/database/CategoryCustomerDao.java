@@ -48,6 +48,7 @@ public class CategoryCustomerDao {
                         }
                     }
 
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         Log.e(TAG,"Ko thể đọc dữ liệu: " + error.toString());
