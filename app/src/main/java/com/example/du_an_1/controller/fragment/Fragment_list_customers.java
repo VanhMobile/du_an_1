@@ -71,7 +71,7 @@ public class Fragment_list_customers extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                adapterCus.filter(s.toString());
             }
 
             @Override

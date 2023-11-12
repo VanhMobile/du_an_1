@@ -1,6 +1,8 @@
 package com.example.du_an_1.controller.fragment;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +74,23 @@ public class ListCategoryCustomerFragment extends Fragment {
                 }else {
                     adapter.updateCategoryCus(categoryCustomers);
                 }
+            }
+        });
+
+        customerBinding.edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 

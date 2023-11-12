@@ -13,9 +13,11 @@ import java.util.ArrayList;
 
 public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapter.ListCustomerViewHolder>{
     ArrayList<Customer>listCus;
+    ArrayList<Customer>filterList;
 
     public ListCustomerAdapter(ArrayList<Customer> listCus) {
         this.listCus = listCus;
+        this.filterList=new ArrayList<>(listCus);
     }
     public void updateData(ArrayList<Customer> newList) {
         this.listCus = newList;
@@ -58,4 +60,19 @@ public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapte
             this.binding=binding;
         }
     }
+    public void filter(String s){
+        listCus.clear();
+        if (s.isEmpty()){
+            listCus.addAll(filterList);
+        }else {
+            for (Customer item: filterList) {
+                if (item.getAddress().contains(s)|| item.getNumberPhone().contains(s)||
+                        item.getCustomerName().contains(s)){
+                    listCus.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 }

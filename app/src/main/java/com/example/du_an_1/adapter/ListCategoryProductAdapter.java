@@ -17,9 +17,11 @@ public class ListCategoryProductAdapter extends RecyclerView.
         Adapter<ListCategoryProductAdapter.ListCategoryProductViewHolder>{
 
     private ArrayList<CategoryProduct>listCateProduct;
+    private ArrayList<CategoryProduct>filterList;
 
     public ListCategoryProductAdapter(ArrayList<CategoryProduct> listCateProduct) {
         this.listCateProduct = listCateProduct;
+        this.filterList=new ArrayList<>(listCateProduct);
     }
 
     public void updateCatePro(ArrayList<CategoryProduct> newList){
@@ -60,5 +62,18 @@ public class ListCategoryProductAdapter extends RecyclerView.
             super(binding.getRoot());
             this.itemCategoryProductBinding=binding;
         }
+    }
+    public void filter(String s){
+        listCateProduct.clear();
+        if (s.isEmpty()){
+            listCateProduct.addAll(filterList);
+        }else {
+            for (CategoryProduct item: filterList) {
+                if (item.getNameCategory().contains(s)){
+                    listCateProduct.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

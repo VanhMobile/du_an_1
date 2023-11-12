@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.du_an_1.R;
 import com.example.du_an_1.database.CategoryProductDao;
@@ -73,6 +74,7 @@ public class AddCategoryProductFragment extends Fragment {
                     AccountSingle accountSingle=AccountSingle.getInstance();
                     Employee employee= accountSingle.getAccount();
                     CategoryProductDao.insertCategoryProduct(categoryProduct, employee.getIdShop());
+                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });

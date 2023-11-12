@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -69,6 +70,7 @@ public class AddCategoryCustomerFragment extends Fragment {
                     AccountSingle accountSingle=AccountSingle.getInstance();
                     Employee employee=accountSingle.getAccount();
                     CategoryCustomerDao.insertCategoryCustomer(categoryCustomer,employee.getIdShop());
+                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });

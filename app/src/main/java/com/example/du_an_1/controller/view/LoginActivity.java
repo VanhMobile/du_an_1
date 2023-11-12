@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                         String numberPhone = loginBinding.userName.getText().toString();
                         String pass = loginBinding.password.getText().toString();
                         employees.forEach(o -> {
-                            if (numberPhone.equals(o.getNumberPhone())
+                            if ((numberPhone.equals(o.getNumberPhone()))
                                     && pass.equals(o.getPassword())){
                                 AccountSingle.getInstance().setAccount(o);
                                 Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();

@@ -14,10 +14,12 @@ import java.util.ArrayList;
 
 public class ListCategoryCustomerAdapter extends RecyclerView.
         Adapter<ListCategoryCustomerAdapter.ListCategoryCustomerViewHolder>{
-    private ArrayList<CategoryCustomer>listCateCus=new ArrayList<>();
+    private ArrayList<CategoryCustomer>listCateCus;
+    private ArrayList<CategoryCustomer>filterList;
 
     public ListCategoryCustomerAdapter(ArrayList<CategoryCustomer> listCateCus) {
         this.listCateCus = listCateCus;
+        this.filterList=new ArrayList<>(listCateCus);
     }
     public void updateCategoryCus(ArrayList<CategoryCustomer> newList){
         this.listCateCus=newList;
@@ -56,5 +58,18 @@ public class ListCategoryCustomerAdapter extends RecyclerView.
             super(binding.getRoot());
             this.binding=binding;
         }
+    }
+    public void filter(String s){
+        listCateCus.clear();
+        if (s.isEmpty()){
+            listCateCus.addAll(filterList);
+        }else {
+            for (CategoryCustomer item :filterList) {
+                if (item.getNameCategory().contains(s)){
+                    listCateCus.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }
