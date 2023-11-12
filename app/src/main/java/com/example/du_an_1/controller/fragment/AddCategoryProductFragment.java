@@ -19,6 +19,7 @@ import com.example.du_an_1.databinding.FragmentAddCategoryProductBinding;
 import com.example.du_an_1.desgin_pattern.build_pantter.CategoryProductBuilder;
 import com.example.du_an_1.desgin_pattern.single_pantter.AccountSingle;
 import com.example.du_an_1.funtions.IdGenerator;
+import com.example.du_an_1.funtions.MyFragment;
 import com.example.du_an_1.funtions.Validations;
 import com.example.du_an_1.model.CategoryProduct;
 import com.example.du_an_1.model.Employee;
@@ -76,6 +77,15 @@ public class AddCategoryProductFragment extends Fragment {
                     CategoryProductDao.insertCategoryProduct(categoryProduct, employee.getIdShop());
                     Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        categoryProductBinding.imgBackACP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyFragment.backFragment(requireActivity().getSupportFragmentManager(),
+                        R.id.fragmentAddPro,
+                        new CategoryProductFragment(),
+                        true);
             }
         });
 

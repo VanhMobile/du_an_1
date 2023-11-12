@@ -31,8 +31,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        Validations.isPhoneNumber(loginBinding.userName);
+        Validations.isEmpty(loginBinding.userName);
         Validations.isEmpty(loginBinding.password);
+
         loginBinding.btnLoginLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,8 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                         String numberPhone = loginBinding.userName.getText().toString();
                         String pass = loginBinding.password.getText().toString();
                         employees.forEach(o -> {
-                            if ((numberPhone.equals(o.getNumberPhone()))
-                                    && pass.equals(o.getPassword())){
+                            if (((numberPhone.equals(o.getNumberPhone())) && pass.equals(o.getPassword()))){
                                 AccountSingle.getInstance().setAccount(o);
                                 Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));

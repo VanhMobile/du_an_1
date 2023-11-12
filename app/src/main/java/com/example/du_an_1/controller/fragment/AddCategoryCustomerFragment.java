@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.du_an_1.R;
 import com.example.du_an_1.database.CategoryCustomerDao;
@@ -17,6 +18,7 @@ import com.example.du_an_1.databinding.FragmentAddCategoryCustomerBinding;
 import com.example.du_an_1.desgin_pattern.build_pantter.CategoryCustomerBuilder;
 import com.example.du_an_1.desgin_pattern.single_pantter.AccountSingle;
 import com.example.du_an_1.funtions.IdGenerator;
+import com.example.du_an_1.funtions.MyFragment;
 import com.example.du_an_1.funtions.Validations;
 import com.example.du_an_1.model.CategoryCustomer;
 import com.example.du_an_1.model.Employee;
@@ -31,6 +33,7 @@ public class AddCategoryCustomerFragment extends Fragment {
     public AddCategoryCustomerFragment() {
         // Required empty public constructor
     }
+    FragmentManager fragmentManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,15 @@ public class AddCategoryCustomerFragment extends Fragment {
                     CategoryCustomerDao.insertCategoryCustomer(categoryCustomer,employee.getIdShop());
                     Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        categoryCustomerBinding.imgBackACP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyFragment.backFragment(requireActivity().getSupportFragmentManager(),
+                        R.id.fragmentCustomer,
+                        new ListCategoryCustomerFragment(),
+                        true);
             }
         });
     }
