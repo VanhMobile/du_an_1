@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +22,13 @@ import com.example.du_an_1.database.CategoryProductDao;
 import com.example.du_an_1.database.ProductDao;
 import com.example.du_an_1.databinding.BottomDialogFilterProBinding;
 import com.example.du_an_1.databinding.FragmentListProductsBinding;
+import com.example.du_an_1.desgin_pattern.single_pantter.AccountSingle;
+import com.example.du_an_1.desgin_pattern.single_pantter.CartShopSingle;
+import com.example.du_an_1.model.CartShop;
 import com.example.du_an_1.model.CategoryProduct;
+import com.example.du_an_1.model.Employee;
 import com.example.du_an_1.model.Product;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -32,7 +37,10 @@ import java.util.stream.Collectors;
 public class ListProductsFragment extends Fragment {
 
     private FragmentListProductsBinding productsBinding;
+
     ListProductAdapter productAdapter;
+    ArrayList<CartShop> cartShops;
+    Employee employee = AccountSingle.getInstance().getAccount();
 
     public ListProductsFragment() {
         // Required empty public constructor
@@ -68,18 +76,40 @@ public class ListProductsFragment extends Fragment {
             }
         });
 
-        ProductDao.getProducts("Shop_1", new ProductDao.GetData() {
+        ProductDao.getProducts(employee.getIdShop(), new ProductDao.GetData() {
             @Override
             public void getData(ArrayList<Product> products) {
                 productAdapter = new ListProductAdapter(products, new ListProductAdapter.Click() {
                     @Override
                     public void clickBtnAdd(Product product) {
+                        ArrayList<CartShop> shopArrayList = CartShopSingle.getInstance().getCartShops();
+                        for (int i = 0; i < shopArrayList.size(); i++){
+                            if (shopArrayList.get(i).getProduct().getProductId().equals(product.getProductId())){
+                                if (shopArrayList.get(i).getQuantity() >= product.getQuantity()){
+                                    return;
+                                }
+                            }
+                        }
+                        ArrayList<Product> dataCart = CartShopSingle.getInstance().getProducts();
+                        dataCart.add(product);
+                        CartShopSingle.getInstance().setProducts(dataCart);
+                    }
 
+                    @Override
+                    public void clickItem(Product product) {
+//                        Intent intent = new Intent(requireContext(), DetailProductActivity.class);
+//                        intent.putExtra("product",product);
+//                        startActivity(intent);
                     }
                 });
 
                 productsBinding.recyclerListProducts.setAdapter(productAdapter);
-                productsBinding.recyclerListProducts.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+                if (isAdded()){
+                    DividerItemDecoration itemDecoration = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
+                    productsBinding.recyclerListProducts.addItemDecoration(itemDecoration);
+                    productsBinding.recyclerListProducts.setLayoutManager(new LinearLayoutManager(requireActivity()));
+                }
                 productsBinding.edtSearchProduct.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -109,7 +139,7 @@ public class ListProductsFragment extends Fragment {
 
     private void showDiaLogCatePro(ArrayList<Product> products) {
         BottomDialogFilterProBinding filterProBinding = BottomDialogFilterProBinding.inflate(getLayoutInflater());
-        BottomSheetDialog bottomFilter= new BottomSheetDialog(requireContext(),R.style.BottomSheetDialogThem);
+        BottomSheetDialog bottomFilter= new BottomSheetDialog(requireContext(), R.style.BottomSheetDialogThem);
         bottomFilter.setContentView(filterProBinding.getRoot());
 
         filterProBinding.filterAll.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +151,7 @@ public class ListProductsFragment extends Fragment {
             }
         });
 
-        CategoryProductDao.getCategoryProduct("Shop_1", new CategoryProductDao.GetData() {
+        CategoryProductDao.getCategoryProduct(employee.getIdShop(), new CategoryProductDao.GetData() {
             @Override
             public void getData(ArrayList<CategoryProduct> categoryProducts) {
                 CateProductDialogAdapter adapter = new CateProductDialogAdapter(categoryProducts, new CateProductDialogAdapter.Click() {
