@@ -8,9 +8,13 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.du_an_1.R;
+import com.example.du_an_1.desgin_pattern.single_pantter.AccountSingle;
+import com.example.du_an_1.model.Employee;
 
 
 public class AccountFragment extends Fragment {
+
+    Employee employee = AccountSingle.getInstance().getAccount();
 
     public AccountFragment() {
         // Required empty public constructor

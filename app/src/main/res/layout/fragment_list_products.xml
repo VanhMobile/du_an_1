@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/inter_bold"
             android:text="Danh sách sản phẩm"
             android:textColor="@color/white"
@@ -63,6 +63,8 @@
         android:background="@drawable/edt_add_product"
         android:textSize="@dimen/_13ssp"
         android:padding="@dimen/_9sdp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:hint="Tìm kiếm sản phẩm"
         android:fontFamily="@font/inter_light"
         android:layout_height="wrap_content"
