@@ -88,6 +88,15 @@ public class CategoryProductFragment extends Fragment {
                         , true);
             }
         });
+        cateProBinding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyFragment.backFragment(requireActivity().getSupportFragmentManager()
+                        ,R.id.fragmentAddPro
+                        ,new HomeFragment()
+                        ,true);
+            }
+        });
         cateProBinding.searchCategoryPro.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
