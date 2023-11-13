@@ -1,8 +1,14 @@
 package com.example.du_an_1.adapter;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,8 +54,11 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = filteredList.get(position);
         int index = position + 1;
+        if (product.getQuantity() == 0){
+            holder.productsBinding.btnAddBill.setVisibility(View.GONE);
+        }
         holder.productsBinding.nameProduct.setText(index + "." + product.getProductName());
-        holder.productsBinding.wholesalePrice.setText("Giá sỉ: " + MoneyFormat.moneyFormat(product.getWholeSalePrice()));
+        holder.productsBinding.costProduct.setText("Giá vốn: " + MoneyFormat.moneyFormat(product.getCost()));
         holder.productsBinding.priceProduct.setText(MoneyFormat.moneyFormat(product.getRetailPrice()));
         holder.productsBinding.quantityProduct.setText("Tồn kho: " + product.getQuantity());
         Glide.with(holder.productsBinding.imgProduct.getContext())
@@ -61,6 +70,14 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
             @Override
             public void onClick(View view) {
                 click.clickBtnAdd(product);
+                addCarAnimation(holder.productsBinding.addOne);
+            }
+        });
+
+        holder.productsBinding.itemProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click.clickItem(product);
             }
         });
     }
@@ -82,7 +99,43 @@ public class ListProductAdapter extends RecyclerView.Adapter<ListProductAdapter.
 
     public interface Click {
         void clickBtnAdd(Product product);
+        void clickItem(Product product);
     }
+
+    public void addCarAnimation(TextView textView){
+        if (textView.getVisibility() == View.GONE) {
+            // Nếu TextView đang ẩn, hiển thị nó với hiệu ứng
+            textView.setAlpha(0f);
+            textView.setVisibility(View.VISIBLE);
+
+            ObjectAnimator fadeIn = ObjectAnimator.ofFloat(textView, "alpha", 0f, 1f);
+            fadeIn.setDuration(1000); // 1 giây
+
+            ObjectAnimator translateY = ObjectAnimator.ofFloat(textView, "translationY", 0f, -60f);
+            translateY.setDuration(500); // 0.5 giây
+
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.playTogether(fadeIn, translateY);
+            animatorSet.start();
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ObjectAnimator fadeOut = ObjectAnimator.ofFloat(textView, "alpha", 1f, 0f);
+                    fadeOut.setDuration(1000); // 1 giây
+                    fadeOut.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            textView.setVisibility(View.GONE);
+                        }
+                    });
+                    fadeOut.start();
+                }
+            }, 500);
+        }
+    }
+
 
     public void filter(String s) {
         filteredList.clear();
