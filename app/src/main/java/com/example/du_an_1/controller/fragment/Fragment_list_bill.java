@@ -51,7 +51,11 @@ public class Fragment_list_bill extends Fragment {
         BillDao.GetBills(employee.getIdShop(), new BillDao.GetData() {
             @Override
             public void getData(ArrayList<Bill> bills) {
-                billArrayList = bills;
+                bills.forEach(o -> {
+                    if (o.getIdAccount().equals(employee.getName()+"-"+employee.getNumberPhone())){
+                        billArrayList.add(o);
+                    }
+                });
 
                 adapter = new ListBillAdapter(billArrayList, new ListBillAdapter.Click() {
                     @Override
@@ -93,7 +97,9 @@ public class Fragment_list_bill extends Fragment {
         binding.btnAddBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(requireContext(), BillActivity.class));
+                Intent intent = new Intent(requireContext(), BillActivity.class);
+                intent.putExtra("bill", "AddBill");
+                startActivity(intent);
             }
         });
     }

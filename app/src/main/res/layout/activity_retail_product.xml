@@ -26,13 +26,6 @@
             android:text="Chi tiết sản phẩm"
             android:textColor="@color/white"
             android:textSize="@dimen/_15ssp" />
-        <ImageView
-            android:id="@+id/iconCartShopping"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:src="@drawable/icon_save" />
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
