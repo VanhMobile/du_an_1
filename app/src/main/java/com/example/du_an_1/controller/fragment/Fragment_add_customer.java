@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.du_an_1.R;
 import com.example.du_an_1.databinding.FragmentAddCustomerBinding;
+import com.example.du_an_1.funtions.MyFragment;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 
@@ -29,5 +30,16 @@ public class Fragment_add_customer extends Fragment {
     private void initView() {
         AdRequest adRequest = new AdRequest.Builder().build();
         customerBinding.adView.loadAd(adRequest);
+
+        customerBinding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyFragment.backFragment(requireActivity().getSupportFragmentManager(),
+                        R.id.fragmentCustomer,
+                        new Fragment_list_customers(),
+                        true);
+            }
+        });
     }
+
 }

@@ -90,5 +90,14 @@ public class Fragment_list_customers extends Fragment {
                         , true);
             }
         });
+        listCustomerBinding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyFragment.backFragment(requireActivity().getSupportFragmentManager(),
+                        R.id.fragmentCustomer,
+                        new HomeFragment(),
+                        true);
+            }
+        });
     }
 }
