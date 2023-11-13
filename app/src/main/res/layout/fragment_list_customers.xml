@@ -47,6 +47,7 @@
        </LinearLayout>
 
        <EditText
+           android:id="@+id/edtSearchCus"
            android:background="@drawable/edt_add_product"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
@@ -65,6 +66,7 @@
            ads:adUnitId="ca-app-pub-5261855707351600/7577404430"/>
 
        <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/rcvCustomers"
            android:padding="@dimen/_10sdp"
            android:layout_width="match_parent"
            android:layout_height="match_parent"/>

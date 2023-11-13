@@ -2,6 +2,8 @@ package com.example.du_an_1.controller.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -58,14 +60,15 @@ public class LoginActivity extends AppCompatActivity {
                         String numberPhone = loginBinding.userName.getText().toString();
                         String pass = loginBinding.password.getText().toString();
                         employees.forEach(o -> {
-                            if (numberPhone.equals(o.getNumberPhone())
+                            if ((numberPhone.equals(o.getNumberPhone()))
                                     && pass.equals(o.getPassword())){
                                 AccountSingle.getInstance().setAccount(o);
+                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
                             }else {
                                 // sau cho một cái dialog ở đây nha
-                                Toast.makeText(LoginActivity.this,"Sai mât khẩu",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this,"Tài khoản mật khẩu không chính xác",Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

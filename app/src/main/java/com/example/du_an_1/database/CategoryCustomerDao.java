@@ -39,6 +39,7 @@ public class CategoryCustomerDao {
                         if (snapshot.exists()){
                             for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                                 CategoryCustomer categoryCustomer = dataSnapshot.getValue(CategoryCustomer.class);
+                                categoryCustomers.add(categoryCustomer);
                                 Log.e(TAG,categoryCustomer.getIdCategory());
                             }
                             data.getData(categoryCustomers);
@@ -46,6 +47,7 @@ public class CategoryCustomerDao {
                             Log.e(TAG,"Ko có dữ liệu ở trong CategoryCustomers");
                         }
                     }
+
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
