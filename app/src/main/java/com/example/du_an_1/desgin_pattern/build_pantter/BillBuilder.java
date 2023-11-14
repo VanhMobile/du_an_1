@@ -1,7 +1,5 @@
 package com.example.du_an_1.desgin_pattern.build_pantter;
 
-
-
 import com.example.du_an_1.model.Bill;
 import com.example.du_an_1.model.CartShop;
 import com.example.du_an_1.model.Customer;
@@ -53,6 +51,11 @@ public class BillBuilder {
 
     public BillBuilder addIdAccount(String idAccount){
         bill.setIdAccount(idAccount);
+        return this;
+    }
+
+    public BillBuilder addDate(String date){
+        bill.setDate(date);
         return this;
     }
 

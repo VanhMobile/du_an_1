@@ -80,11 +80,13 @@ public class Validations {
         Regex regex = new Regex("[A-Za-z0-9]+@[a-zA-Z0-9]+(\\\\.[a-zA-Z0-9]+)");
         if (!regex.matches(editText.getText().toString())) {
             editText.setError("Sai định dạng email");
+            return true;
         } else {
             // nếu đụng định dạng hủy bỏ error
             editText.setError(null);
+            return false;
         }
-        return regex.matches(editText.getText().toString());
+
     }
 
     //check định dạng số điện thoại khi sự kiện onInput sảy ra
@@ -119,11 +121,13 @@ public class Validations {
         Regex regex = new Regex("^\\+?[0-9]{10,13}$");
         if (!regex.matches(editText.getText().toString())) {
             editText.setError("Sai định dạng số điện thoại");
+            return true;
         } else {
             // đúng hủy bỏ error
             editText.setError(null);
+            return false;
         }
-        return regex.matches(editText.getText().toString());
+
     }
 
     // check số lượng khi nhập

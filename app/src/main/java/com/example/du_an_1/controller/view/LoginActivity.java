@@ -31,19 +31,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        Validations.isPhoneNumber(loginBinding.userName);
+        Validations.isEmpty(loginBinding.userName);
         Validations.isEmpty(loginBinding.password);
+
         loginBinding.btnLoginLogin.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 int count = 0;
-                if(!Validations.isEmptyPress(loginBinding.userName)){
-                    if(!Validations.isPhoneNumberPress(loginBinding.userName)){
-                        count++;
-                    }
-                }else {
+                if (Validations.isEmptyPress(loginBinding.userName)){
                     count ++;
                 }
+
                 if (Validations.isEmptyPress(loginBinding.password)){
                     count ++;
                 }
@@ -58,19 +57,22 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void getData(ArrayList<Employee> employees) {
                         String numberPhone = loginBinding.userName.getText().toString();
-                        String pass = loginBinding.password.getText().toString();
-                        employees.forEach(o -> {
-                            if ((numberPhone.equals(o.getNumberPhone()))
-                                    && pass.equals(o.getPassword())){
-                                AccountSingle.getInstance().setAccount(o);
-                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        boolean checkLogin=false;
+
+                        for (Employee item: employees) {
+                            if ((item.getNumberPhone().equals(numberPhone))|| (item.getEmail().equals(numberPhone))){
+                                AccountSingle.getInstance().setAccount(item);
+                                Toast.makeText(LoginActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
-                            }else {
-                                // sau cho một cái dialog ở đây nha
-                                Toast.makeText(LoginActivity.this,"Tài khoản mật khẩu không chính xác",Toast.LENGTH_SHORT).show();
+
+                                checkLogin=true;
+                                break;
                             }
-                        });
+                        }
+                        if (!checkLogin){
+                            Toast.makeText(LoginActivity.this, "Tài khoản mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }
