@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +17,13 @@ import com.example.du_an_1.controller.view.ProductActivity;
 import com.example.du_an_1.databinding.FragmentHomeBinding;
 
 import com.example.du_an_1.desgin_pattern.single_pantter.CartShopSingle;
+import com.example.du_an_1.funtions.MessengerManager;
 import com.example.du_an_1.funtions.RequestPermissions;
 
 import com.google.android.gms.ads.AdRequest;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private FragmentHomeBinding homeBinding;
 
@@ -71,6 +73,13 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        homeBinding.help.btnMessenger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessengerManager.openMessengerWithLink("https://www.facebook.com/messages/148593518345206",requireActivity());
+            }
+        });
+
         homeBinding.shortcut.createBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +125,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+        homeBinding.swipeRefresh.setOnRefreshListener(this);
+
         homeBinding.shortcut.productCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,5 +136,14 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    /**
+     * Called when a swipe gesture triggers a refresh.
+     */
+    @Override
+    public void onRefresh() {
+
+        homeBinding.swipeRefresh.setRefreshing(false);
     }
 }
