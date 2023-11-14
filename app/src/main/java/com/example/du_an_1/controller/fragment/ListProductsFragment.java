@@ -78,22 +78,6 @@ public class ListProductsFragment extends Fragment {
         });
 
         AddReLoad();
-        productsBinding.edtSearchProduct.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                productAdapter.filter(charSequence.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         productsBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -138,6 +122,22 @@ public class ListProductsFragment extends Fragment {
                     productsBinding.recyclerListProducts.addItemDecoration(itemDecoration);
                     productsBinding.recyclerListProducts.setLayoutManager(new LinearLayoutManager(requireActivity()));
                 }
+                productsBinding.edtSearchProduct.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        productAdapter.filter(charSequence.toString());
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
                 productsBinding.tvFilter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

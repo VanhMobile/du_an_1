@@ -106,4 +106,17 @@ public class Product {
     public void setNote(String note) {
         this.note = note;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Product product = (Product) obj;
+        return this.getProductId().equals(product.getProductId());
+    }
+    @Override
+    public int hashCode() {
+        int result = this.getProductId().hashCode();
+        return result;
+    }
 }

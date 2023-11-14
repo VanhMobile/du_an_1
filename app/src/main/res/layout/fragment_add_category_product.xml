@@ -32,9 +32,10 @@
             android:fontFamily="@font/inter_bold"
             android:text="Thêm danh mục sản phẩm"
             android:textColor="@color/white"
-            android:textSize="@dimen/_15ssp" />
+            android:textSize="@dimen/_13ssp" />
 
         <ImageView
+            android:id="@+id/imgSave"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_gravity="center_vertical"

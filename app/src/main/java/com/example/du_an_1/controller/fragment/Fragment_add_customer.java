@@ -36,7 +36,6 @@ import java.util.HashSet;
 public class Fragment_add_customer extends Fragment {
 
     private FragmentAddCustomerBinding binding;
-    private ArrayList<Customer> customerArrayList = new ArrayList<>();
     Employee employee = AccountSingle.getInstance().getAccount();
     private ListTypeCustomerDialogAdapter adapter;
 
@@ -107,18 +106,14 @@ public class Fragment_add_customer extends Fragment {
                         }
                     }
                 });
-
-                binding.btnSave.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        inSertCustomer();
-                    }
-                });
-
-
-
                 customerDialog.show();
 
+            }
+        });
+        binding.imgSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                inSertCustomer();
             }
         });
     }
