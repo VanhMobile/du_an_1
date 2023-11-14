@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
 import com.example.du_an_1.adapter.ListBillAdapter;
@@ -43,10 +44,29 @@ public class Fragment_list_bill extends Fragment {
     }
 
     private void initView() {
+        addReload();
+
+        binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                addReload();
+                binding.swipeRefresh.setRefreshing(false);
+            }
+        });
+
+        binding.btnAddBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(requireContext(), BillActivity.class);
+                intent.putExtra("bill", "AddBill");
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void addReload() {
         AdRequest adRequest = new AdRequest.Builder().build();
         binding.adView.loadAd(adRequest);
-
-
         billArrayList = new ArrayList<>();
         BillDao.GetBills(employee.getIdShop(), new BillDao.GetData() {
             @Override
@@ -91,15 +111,6 @@ public class Fragment_list_bill extends Fragment {
 
                     }
                 });
-            }
-        });
-
-        binding.btnAddBill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(requireContext(), BillActivity.class);
-                intent.putExtra("bill", "AddBill");
-                startActivity(intent);
             }
         });
     }
