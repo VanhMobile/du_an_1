@@ -59,22 +59,14 @@ public class AddCategoryCustomerFragment extends Fragment {
         categoryCustomerBinding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameCategoryCus=categoryCustomerBinding.edtCategoryName.getText().toString();
-                String mNote=categoryCustomerBinding.edtNote.getText().toString();
+               addCateCustomer();
+            }
+        });
 
-                if (!Validations.isEmptyPress(categoryCustomerBinding.edtCategoryName)){
-                    String mID=generateNextID(getContext(), "LKH_");
-                    CategoryCustomerBuilder categoryCustomerBuilder=new CategoryCustomerBuilder();
-                    CategoryCustomer categoryCustomer= categoryCustomerBuilder
-                            .addId(mID)
-                            .addName(nameCategoryCus)
-                            .addNote(mNote).build();
-
-                    AccountSingle accountSingle=AccountSingle.getInstance();
-                    Employee employee=accountSingle.getAccount();
-                    CategoryCustomerDao.insertCategoryCustomer(categoryCustomer,employee.getIdShop());
-                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                }
+        categoryCustomerBinding.imgSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCateCustomer();
             }
         });
         categoryCustomerBinding.imgBackACP.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +79,26 @@ public class AddCategoryCustomerFragment extends Fragment {
             }
         });
     }
+
+    private void addCateCustomer() {
+        String nameCategoryCus=categoryCustomerBinding.edtCategoryName.getText().toString();
+        String mNote=categoryCustomerBinding.edtNote.getText().toString();
+
+        if (!Validations.isEmptyPress(categoryCustomerBinding.edtCategoryName)){
+            String mID=generateNextID(getContext(), "LKH_");
+            CategoryCustomerBuilder categoryCustomerBuilder=new CategoryCustomerBuilder();
+            CategoryCustomer categoryCustomer= categoryCustomerBuilder
+                    .addId(mID)
+                    .addName(nameCategoryCus)
+                    .addNote(mNote).build();
+
+            AccountSingle accountSingle=AccountSingle.getInstance();
+            Employee employee=accountSingle.getAccount();
+            CategoryCustomerDao.insertCategoryCustomer(categoryCustomer,employee.getIdShop());
+            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public static String generateNextID(Context context, String s){
         int count=getNextCount(context);
         String id=s+ count;

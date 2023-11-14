@@ -61,22 +61,14 @@ public class AddCategoryProductFragment extends Fragment {
         categoryProductBinding.btnSaveACP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameCategoryProduct=categoryProductBinding.edtTenDanhMuc.getText().toString();
-                String edtNote=categoryProductBinding.edtGhiChu.getText().toString();
+               addCatePro();
+            }
+        });
 
-                if (!Validations.isEmptyPress(categoryProductBinding.edtTenDanhMuc)){
-                    String mID=generateNextID(getContext(), "LSP_");
-                    CategoryProductBuilder categoryProductBuilder=new CategoryProductBuilder();
-                    CategoryProduct categoryProduct=categoryProductBuilder.addName(nameCategoryProduct)
-                            .addNote(edtNote)
-                            .addId(mID)
-                            .build();
-
-                    AccountSingle accountSingle=AccountSingle.getInstance();
-                    Employee employee= accountSingle.getAccount();
-                    CategoryProductDao.insertCategoryProduct(categoryProduct, employee.getIdShop());
-                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                }
+        categoryProductBinding.imgSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCatePro();
             }
         });
         categoryProductBinding.imgBackACP.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +82,26 @@ public class AddCategoryProductFragment extends Fragment {
         });
 
     }
+
+    private void addCatePro() {
+        String nameCategoryProduct=categoryProductBinding.edtTenDanhMuc.getText().toString();
+        String edtNote=categoryProductBinding.edtGhiChu.getText().toString();
+
+        if (!Validations.isEmptyPress(categoryProductBinding.edtTenDanhMuc)){
+            String mID=generateNextID(getContext(), "LSP_");
+            CategoryProductBuilder categoryProductBuilder=new CategoryProductBuilder();
+            CategoryProduct categoryProduct=categoryProductBuilder.addName(nameCategoryProduct)
+                    .addNote(edtNote)
+                    .addId(mID)
+                    .build();
+
+            AccountSingle accountSingle=AccountSingle.getInstance();
+            Employee employee= accountSingle.getAccount();
+            CategoryProductDao.insertCategoryProduct(categoryProduct, employee.getIdShop());
+            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public static String generateNextID(Context context, String s){
         int count=getNextCount(context);
         String id=s+ count;

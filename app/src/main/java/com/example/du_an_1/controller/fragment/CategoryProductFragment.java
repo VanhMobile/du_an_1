@@ -1,10 +1,12 @@
 package com.example.du_an_1.controller.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.du_an_1.MainActivity;
 import com.example.du_an_1.R;
 import com.example.du_an_1.adapter.ListCategoryProductAdapter;
 import com.example.du_an_1.database.CategoryProductDao;
@@ -31,6 +34,8 @@ public class CategoryProductFragment extends Fragment {
 
     private FragmentCategoryProductBinding cateProBinding;
     private ListCategoryProductAdapter adapter;
+    AccountSingle accountSingle=AccountSingle.getInstance();
+    Employee employee= accountSingle.getAccount();
 
 
     public CategoryProductFragment() {
@@ -66,17 +71,12 @@ public class CategoryProductFragment extends Fragment {
                 (cateProBinding.getRoot().getContext(), DividerItemDecoration.VERTICAL);
         cateProBinding.rcvCatePro.addItemDecoration(dividerItemDecoration);
 
-        AccountSingle accountSingle=AccountSingle.getInstance();
-        Employee employee= accountSingle.getAccount();
-        CategoryProductDao.getCategoryProduct(employee.getIdShop(), new CategoryProductDao.GetData() {
+        addRecyc();
+        cateProBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void getData(ArrayList<CategoryProduct> categoryProducts) {
-                if (adapter== null){
-                    adapter=new ListCategoryProductAdapter(categoryProducts);
-                    cateProBinding.rcvCatePro.setAdapter(adapter);
-                }else {
-                    adapter.updateCatePro(categoryProducts);
-                }
+            public void onRefresh() {
+                addRecyc();
+                cateProBinding.swipeRefresh.setRefreshing(false);
             }
         });
         cateProBinding.addCatePro.setOnClickListener(new View.OnClickListener() {
@@ -91,10 +91,8 @@ public class CategoryProductFragment extends Fragment {
         cateProBinding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyFragment.backFragment(requireActivity().getSupportFragmentManager()
-                        ,R.id.fragmentAddPro
-                        ,new HomeFragment()
-                        ,true);
+                startActivity(new Intent(requireContext(), MainActivity.class));
+                requireActivity().finish();
             }
         });
         cateProBinding.searchCategoryPro.addTextChangedListener(new TextWatcher() {
@@ -111,6 +109,20 @@ public class CategoryProductFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+    }
+
+    private void addRecyc() {
+        CategoryProductDao.getCategoryProduct(employee.getIdShop(), new CategoryProductDao.GetData() {
+            @Override
+            public void getData(ArrayList<CategoryProduct> categoryProducts) {
+                if (adapter== null){
+                    adapter=new ListCategoryProductAdapter(categoryProducts);
+                    cateProBinding.rcvCatePro.setAdapter(adapter);
+                }else {
+                    adapter.updateCatePro(categoryProducts);
+                }
             }
         });
     }

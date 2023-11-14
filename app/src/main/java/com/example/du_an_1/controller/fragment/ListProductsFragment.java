@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -76,6 +77,17 @@ public class ListProductsFragment extends Fragment {
             }
         });
 
+        AddReLoad();
+        productsBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                AddReLoad();
+                productsBinding.swipeRefresh.setRefreshing(false);
+            }
+        });
+    }
+
+    private void AddReLoad() {
         ProductDao.getProducts(employee.getIdShop(), new ProductDao.GetData() {
             @Override
             public void getData(ArrayList<Product> products) {
@@ -126,7 +138,6 @@ public class ListProductsFragment extends Fragment {
 
                     }
                 });
-
                 productsBinding.tvFilter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

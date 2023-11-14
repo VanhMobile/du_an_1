@@ -14,6 +14,7 @@ import com.example.du_an_1.MainActivity;
 import com.example.du_an_1.database.EmployeeDao;
 import com.example.du_an_1.databinding.ActivityLoginBinding;
 import com.example.du_an_1.desgin_pattern.single_pantter.AccountSingle;
+import com.example.du_an_1.funtions.MessengerManager;
 import com.example.du_an_1.funtions.Validations;
 import com.example.du_an_1.model.Employee;
 
@@ -33,6 +34,13 @@ public class LoginActivity extends AppCompatActivity {
     private void initView() {
         Validations.isEmpty(loginBinding.userName);
         Validations.isEmpty(loginBinding.password);
+
+        loginBinding.btnMess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessengerManager.openMessengerWithLink("https://www.facebook.com/messages/148593518345206",LoginActivity.this);
+            }
+        });
 
         loginBinding.btnLoginLogin.setOnClickListener(new View.OnClickListener() {
 

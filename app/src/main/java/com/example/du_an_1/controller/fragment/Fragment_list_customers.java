@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.du_an_1.MainActivity;
 import com.example.du_an_1.R;
@@ -33,8 +34,6 @@ import java.util.ArrayList;
 public class Fragment_list_customers extends Fragment {
 
     private FragmentListCustomersBinding listCustomerBinding;
-    private ArrayList<Customer> customerArrayList = new ArrayList<>();
-    private ArrayList<Customer> listTemp = new ArrayList<>();
     private ListCustomerAdapter adapter;
     Employee employee = AccountSingle.getInstance().getAccount();
 
@@ -54,14 +53,42 @@ public class Fragment_list_customers extends Fragment {
         AdRequest adRequest = new AdRequest.Builder().build();
         listCustomerBinding.adView.loadAd(adRequest);
 
+        addRecyc();
+        listCustomerBinding.addCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyFragment.replaceFragment(requireActivity().getSupportFragmentManager()
+                        , R.id.fragmentCustomer
+                        , new Fragment_add_customer()
+                        , true);
+            }
+        });
 
+        listCustomerBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                addRecyc();
+                listCustomerBinding.swipeRefresh.setRefreshing(false);
+            }
+        });
+
+        listCustomerBinding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(requireActivity(), MainActivity.class));
+                requireActivity().finish();
+            }
+        });
+
+
+    }
+
+    private void addRecyc() {
         CustomerDao.getCustomers(employee.getIdShop(), new CustomerDao.GetData() {
             @Override
             public void getData(ArrayList<Customer> customers) {
-                customerArrayList.addAll(customers);
-                listTemp = customers;
                 if (isAdded()){
-                    adapter = new ListCustomerAdapter(customerArrayList, new ListCustomerAdapter.Click() {
+                    adapter = new ListCustomerAdapter(customers, new ListCustomerAdapter.Click() {
                         @Override
                         public void clickBtnCall(Customer customer) {
                             // Tạo một Intent với hành động ACTION_DIAL
@@ -91,7 +118,6 @@ public class Fragment_list_customers extends Fragment {
                     listCustomerBinding.recyclerViewListCustomer.setAdapter(adapter);
                     listCustomerBinding.recyclerViewListCustomer.setLayoutManager(layoutManager);
                     listCustomerBinding.edtSearchCustomer.addTextChangedListener(new TextWatcher() {
-                        //ArrayList<Customer> listTemp = customerArrayList;
                         @Override
                         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -111,26 +137,5 @@ public class Fragment_list_customers extends Fragment {
                 }
             }
         });
-
-
-        listCustomerBinding.addCustomer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyFragment.replaceFragment(requireActivity().getSupportFragmentManager()
-                        , R.id.fragmentCustomer
-                        , new Fragment_add_customer()
-                        , true);
-            }
-        });
-
-        listCustomerBinding.btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(requireActivity(), MainActivity.class));
-                requireActivity().finish();
-            }
-        });
-
-
     }
 }
