@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.du_an_1.controller.view.BillActivity;
 import com.example.du_an_1.controller.view.CustomerActivity;
+import com.example.du_an_1.controller.view.NetworkChangeActivity;
 import com.example.du_an_1.controller.view.ProductActivity;
 
 import com.example.du_an_1.databinding.FragmentHomeBinding;
@@ -27,7 +28,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private FragmentHomeBinding homeBinding;
 
-
+;   private NetworkChangeActivity networkChangeActivity;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -44,7 +45,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         homeBinding = FragmentHomeBinding.inflate(inflater, container, false);
-
+        checkNetwork();
         initView();
         return homeBinding.getRoot();
     }
@@ -145,5 +146,9 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onRefresh() {
 
         homeBinding.swipeRefresh.setRefreshing(false);
+    }
+    public void checkNetwork (){
+        networkChangeActivity = new NetworkChangeActivity(getContext());
+        networkChangeActivity.startNetworkListener();
     }
 }
