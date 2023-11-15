@@ -45,6 +45,7 @@
 
 
             <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/updatePass"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_80sdp"
                 app:srcCompat="@drawable/img_wellcome"
@@ -65,6 +66,7 @@
                 android:textSize="@dimen/_13ssp" />
 
             <EditText
+                android:id="@+id/nameEmploy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -93,7 +95,7 @@
                 android:textSize="@dimen/_13ssp" />
 
             <EditText
-
+                android:id="@+id/emailEmploy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -121,6 +123,7 @@
                 android:textSize="@dimen/_13ssp" />
 
             <EditText
+                android:id="@+id/phoneNumberEmploy"
                 android:paddingTop="@dimen/_5sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
