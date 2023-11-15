@@ -65,15 +65,15 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void getData(ArrayList<Employee> employees) {
                         String numberPhone = loginBinding.userName.getText().toString();
+                        String pass=loginBinding.password.getText().toString();
                         boolean checkLogin=false;
 
                         for (Employee item: employees) {
-                            if ((item.getNumberPhone().equals(numberPhone))|| (item.getEmail().equals(numberPhone))){
+                            if (((item.getNumberPhone().equals(numberPhone))|| (item.getEmail().equals(numberPhone)))&&(item.getPassword().equals(pass))){
                                 AccountSingle.getInstance().setAccount(item);
-                                Toast.makeText(LoginActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
-
                                 checkLogin=true;
                                 break;
                             }
