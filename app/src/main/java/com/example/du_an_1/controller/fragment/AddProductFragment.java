@@ -316,6 +316,13 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
                         .addNote(note)
                         .build();
                 ProductDao.insertProduct(product, employee.getIdShop());
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(requireActivity(),"Thêm thành công",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                thread.start();
             }
             clearData();
         }
