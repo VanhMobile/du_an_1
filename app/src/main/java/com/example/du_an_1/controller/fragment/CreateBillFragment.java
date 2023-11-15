@@ -204,9 +204,13 @@ public class CreateBillFragment extends Fragment {
                     ProductDao.insertProduct(product,employee.getIdShop());
                 });
                 BillDao.insertBill(bill,employee.getIdShop());
-                if (isAdded()){
-                    Toast.makeText(requireContext(),"Tạo hóa đơn thành công",Toast.LENGTH_SHORT);
-                }
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(requireActivity(),"Thêm hóa đơn thành công",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                thread.start();
                 clearData();
             }
         });
