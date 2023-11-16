@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -35,6 +36,13 @@ public class LoginActivity extends AppCompatActivity {
         Validations.isEmpty(loginBinding.userName);
         Validations.isEmpty(loginBinding.password);
 
+        loginBinding.txtRemember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this , ConfrimEmailActivity.class );
+                startActivity(intent);
+            }
+        });
         loginBinding.btnMess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

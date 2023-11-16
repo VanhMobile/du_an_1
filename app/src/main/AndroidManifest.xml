@@ -42,6 +42,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <activity android:name="com.example.du_an_1.controller.view.ConfrimEmailActivity"
+            android:exported="false"
+        />
+
         <activity
             android:name=".controller.view.WellComeActivity"
             android:exported="true">
