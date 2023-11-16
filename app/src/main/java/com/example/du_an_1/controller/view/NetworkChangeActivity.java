@@ -48,7 +48,7 @@ public class NetworkChangeActivity {
                                 NetworkCapabilities networkCapabilities) {
                             super.onCapabilitiesChanged(network, networkCapabilities);
                             // Khi các khả năng của mạng thay đổi
-                            // Bạn có thể xử lý theo nhu cầu của mình ở đây
+
                         }
                     });
         }
