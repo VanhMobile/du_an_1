@@ -2,11 +2,8 @@ package com.example.du_an_1.controller.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -39,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBinding.txtRemember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this , ConfrimEmailActivity.class );
+                Intent intent = new Intent(LoginActivity.this , ConfirmPasswordActivity.class );
                 startActivity(intent);
             }
         });
@@ -87,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }
                         if (!checkLogin){
-                            Toast.makeText(LoginActivity.this, "Tài khoản mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Thông tin đăng nhập sai", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

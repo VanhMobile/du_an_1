@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".controller.fragment.AddProductFragment">
+    >
 
     <LinearLayout
         android:id="@+id/rlt1"
@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/btnBack"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_gravity="center_vertical"
@@ -54,7 +55,7 @@
 
 
         <EditText
-
+            android:id="@+id/edtPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -74,7 +75,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"/>
         <EditText
-
+            android:id="@+id/edtPass2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -104,6 +105,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
             android:text=" Xác nhận"
+            android:id="@+id/btnConfirm"
             android:textColor="@color/black"
             android:fontFamily="@font/inter_bold"
             android:textStyle="bold"

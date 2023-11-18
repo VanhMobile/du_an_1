@@ -5,7 +5,7 @@ import com.example.du_an_1.model.Employee;
 public class AccountSingle {
     private static AccountSingle instance;
 
-    private Employee account;
+    private Employee account = new Employee();
 
     public Employee getAccount() {
         return account;

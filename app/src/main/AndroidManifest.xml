@@ -9,12 +9,13 @@
         android:name="android.hardware.telephony"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -42,9 +43,17 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity android:name="com.example.du_an_1.controller.view.ConfrimEmailActivity"
-            android:exported="false"
-        />
+        <activity
+            android:name=".controller.view.ConfirmPasswordActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".controller.view.OtpConfirmActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".controller.view.NewPassActivity"
+            android:exported="false" />
 
         <activity
             android:name=".controller.view.WellComeActivity"
@@ -62,11 +71,13 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-5261855707351600~3458992185"/>
-        <receiver android:name=".util.NetworkChangeReceiver"
+            android:value="ca-app-pub-5261855707351600~3458992185" />
+
+        <receiver
+            android:name=".controller.view.NetworkChangeActivity"
             android:exported="false">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
     </application>

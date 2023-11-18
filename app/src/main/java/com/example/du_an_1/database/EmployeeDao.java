@@ -15,6 +15,14 @@ import java.util.ArrayList;
 
 public class EmployeeDao {
 
+    public static void insertEmployee(Employee employee) {
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        // tạo account cho nhân viên
+        db.child("EmployeeAccount")
+                .child(employee.getIdEmployee())
+                .setValue(employee);
+    }
+
     private static String TAG = EmployeeDao.class.getSimpleName();
 
     public static void getEmployees(GetData data){
