@@ -139,35 +139,7 @@
                 android:background="@color/line"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:fontFamily="@font/inter_light"
-                android:text="Địa chỉ"
-                android:textColor="@color/line"
-                android:textSize="@dimen/_13ssp" />
 
-            <EditText
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:hint="Nhập địa chỉ của bạn"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                android:textSize="@dimen/_13ssp"
-                android:backgroundTint="@android:color/transparent"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/line"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"/>
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
