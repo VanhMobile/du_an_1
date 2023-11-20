@@ -23,7 +23,7 @@
             android:textSize="@dimen/_15ssp" />
 
         <ImageView
-            android:id="@+id/iconCartShopping"
+            android:id="@+id/btnSave"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_alignParentEnd="true"
@@ -45,7 +45,6 @@
 
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/updatePass"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_80sdp"
                 app:srcCompat="@drawable/img_wellcome"
@@ -154,6 +153,7 @@
                 app:cornerRadius="@dimen/_8sdp" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_40sdp"
