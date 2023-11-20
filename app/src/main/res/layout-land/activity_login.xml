@@ -40,6 +40,8 @@
                     android:src="@drawable/icon_user"/>
                 <EditText
                     android:id="@+id/userName"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:backgroundTint="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:hint="Number phone"
@@ -70,6 +72,8 @@
                     android:src="@drawable/icon_password"/>
                 <EditText
                     android:id="@+id/password"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:backgroundTint="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:hint="password"

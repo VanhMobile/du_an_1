@@ -62,6 +62,8 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:hint="Nhập mật khẩu mới của bạn"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:paddingTop="@dimen/_5sdp"
             android:fontFamily="@font/inter"
             android:paddingBottom="@dimen/_10sdp"
@@ -77,6 +79,8 @@
         <EditText
             android:id="@+id/edtPass2"
             android:layout_width="match_parent"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"

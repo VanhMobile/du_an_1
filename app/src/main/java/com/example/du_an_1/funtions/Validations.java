@@ -3,7 +3,9 @@ package com.example.du_an_1.funtions;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import kotlin.text.Regex;
 
@@ -199,12 +201,46 @@ public class Validations {
         });
     }
 
+    public static void isPassword(EditText editText, TextView errorMess) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Regex regex = new Regex("^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$");
+                if (!regex.matches(charSequence.toString())) {
+                    errorMess.setVisibility(View.VISIBLE);
+                } else {
+                    errorMess.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+
     public static boolean isPasswordPress(EditText editText){
         Regex regex = new Regex("^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$");
         if (!regex.matches(editText.getText().toString())) {
             editText.setError("Sai định dạng password");
         } else {
             editText.setError(null);
+        }
+        return regex.matches(editText.getText().toString());
+    }
+
+    public static boolean isPasswordPress(EditText editText, TextView errorMess){
+        Regex regex = new Regex("^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$");
+        if (!regex.matches(editText.getText().toString())) {
+            errorMess.setVisibility(View.VISIBLE);
+        } else {
+            errorMess.setVisibility(View.GONE);
         }
         return regex.matches(editText.getText().toString());
     }
