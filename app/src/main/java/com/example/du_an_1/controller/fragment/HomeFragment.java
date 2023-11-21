@@ -183,13 +183,19 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         });
     }
 
-    /**
-     * Called when a swipe gesture triggers a refresh.
-     */
+
     @Override
     public void onRefresh() {
         statistical();
         barChart();
+        CartShopSingle cartShopSingle = CartShopSingle.getInstance();
+
+        if (cartShopSingle.getProducts().size() == 0){
+            homeBinding.cartSize.setVisibility(View.GONE);
+        }else{
+            homeBinding.cartSize.setVisibility(View.VISIBLE);
+            homeBinding.cartSize.setText(cartShopSingle.getProducts().size() + "");
+        }
         homeBinding.swipeRefresh.setRefreshing(false);
     }
 
@@ -210,7 +216,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 for (Bill bill : bill30){
                     totalRevenue += bill.getSumPrice();
                     for (CartShop cartShop: bill.getListProduct()){
-                        totalEx += cartShop.getProduct().getCost();
+                        totalEx += (cartShop.getProduct().getCost() * cartShop.getQuantity());
                     }
                 }
 
@@ -236,7 +242,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 for (Bill bill : billNow){
                     totalRevenue += bill.getSumPrice();
                     for (CartShop cartShop: bill.getListProduct()){
-                        totalEx += cartShop.getProduct().getCost();
+                        totalEx += (cartShop.getProduct().getCost() * cartShop.getQuantity());
                     }
                 }
 

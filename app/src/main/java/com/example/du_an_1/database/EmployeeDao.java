@@ -21,6 +21,11 @@ public class EmployeeDao {
         db.child("EmployeeAccount")
                 .child(employee.getIdEmployee())
                 .setValue(employee);
+
+        db.child(employee.getIdShop())
+                .child("Employees")
+                .child(employee.getIdEmployee())
+                .setValue(employee);
     }
 
     private static String TAG = EmployeeDao.class.getSimpleName();

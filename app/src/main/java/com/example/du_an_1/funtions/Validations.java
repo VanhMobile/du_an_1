@@ -82,13 +82,11 @@ public class Validations {
         Regex regex = new Regex("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
         if (!regex.matches(editText.getText().toString())) {
             editText.setError("Sai định dạng email");
-            return true;
         } else {
             // nếu đụng định dạng hủy bỏ error
             editText.setError(null);
-            return false;
         }
-
+        return regex.matches(editText.getText().toString());
     }
 
     //check định dạng số điện thoại khi sự kiện onInput sảy ra

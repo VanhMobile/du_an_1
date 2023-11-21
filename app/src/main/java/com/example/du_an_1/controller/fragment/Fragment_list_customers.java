@@ -54,37 +54,6 @@ public class Fragment_list_customers extends Fragment {
         AdRequest adRequest = new AdRequest.Builder().build();
         listCustomerBinding.adView.loadAd(adRequest);
 
-        addRecyc();
-        listCustomerBinding.addCustomer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyFragment.replaceFragment(requireActivity().getSupportFragmentManager()
-                        , R.id.fragmentCustomer
-                        , new Fragment_add_customer()
-                        , true);
-            }
-        });
-
-        listCustomerBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                addRecyc();
-                listCustomerBinding.swipeRefresh.setRefreshing(false);
-            }
-        });
-
-        listCustomerBinding.btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(requireActivity(), MainActivity.class));
-                requireActivity().finish();
-            }
-        });
-
-
-    }
-
-    private void addRecyc() {
         CustomerDao.getCustomers(employee.getIdShop(), new CustomerDao.GetData() {
             @Override
             public void getData(ArrayList<Customer> customers) {
@@ -141,5 +110,41 @@ public class Fragment_list_customers extends Fragment {
                 }
             }
         });
+        listCustomerBinding.addCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyFragment.replaceFragment(requireActivity().getSupportFragmentManager()
+                        , R.id.fragmentCustomer
+                        , new Fragment_add_customer()
+                        , true);
+            }
+        });
+
+        listCustomerBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                addRecyc();
+                listCustomerBinding.swipeRefresh.setRefreshing(false);
+            }
+        });
+
+        listCustomerBinding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(requireActivity(), MainActivity.class));
+                requireActivity().finish();
+            }
+        });
+
+
+    }
+
+    private void addRecyc() {
+       CustomerDao.getCustomers(employee.getIdShop(), new CustomerDao.GetData() {
+           @Override
+           public void getData(ArrayList<Customer> customers) {
+               adapter.setDATA(customers);
+           }
+       });
     }
 }

@@ -35,6 +35,11 @@ public class ListBillAdapter extends RecyclerView.Adapter<ListBillAdapter.ViewHo
         return new ViewHolder(itemListBillBinding);
     }
 
+    public void setData(ArrayList<Bill> billArrayList){
+        this.billArrayList = billArrayList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Bill bill = billArrayList.get(position);

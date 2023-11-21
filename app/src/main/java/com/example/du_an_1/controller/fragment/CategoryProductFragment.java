@@ -70,6 +70,17 @@ public class CategoryProductFragment extends Fragment {
         DividerItemDecoration dividerItemDecoration=new DividerItemDecoration
                 (cateProBinding.getRoot().getContext(), DividerItemDecoration.VERTICAL);
         cateProBinding.rcvCatePro.addItemDecoration(dividerItemDecoration);
+        CategoryProductDao.getCategoryProduct(employee.getIdShop(), new CategoryProductDao.GetData() {
+            @Override
+            public void getData(ArrayList<CategoryProduct> categoryProducts) {
+                if (adapter== null){
+                    adapter=new ListCategoryProductAdapter(categoryProducts);
+                    cateProBinding.rcvCatePro.setAdapter(adapter);
+                }else {
+                    adapter.updateCatePro(categoryProducts);
+                }
+            }
+        });
 
         addRecyc();
         cateProBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -117,12 +128,7 @@ public class CategoryProductFragment extends Fragment {
         CategoryProductDao.getCategoryProduct(employee.getIdShop(), new CategoryProductDao.GetData() {
             @Override
             public void getData(ArrayList<CategoryProduct> categoryProducts) {
-                if (adapter== null){
-                    adapter=new ListCategoryProductAdapter(categoryProducts);
-                    cateProBinding.rcvCatePro.setAdapter(adapter);
-                }else {
-                    adapter.updateCatePro(categoryProducts);
-                }
+                adapter.updateCatePro(categoryProducts);
             }
         });
     }

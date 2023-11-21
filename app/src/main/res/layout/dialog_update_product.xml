@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cập nhập mập khẩu"
+        android:text="Cập nhập sản phẩm"
         android:fontFamily="@font/inter_light"
         android:gravity="center_horizontal"
         android:textSize="@dimen/_20ssp"
@@ -25,24 +25,14 @@
         android:paddingEnd="@dimen/_10sdp"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/passwordOld"
+            android:id="@+id/nameProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mật khẩu cũ"
+            android:hint="Tên sản phẩm"
             android:textSize="@dimen/_15ssp"
             android:fontFamily="@font/inter_light"
             />
     </com.google.android.material.textfield.TextInputLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#E82E2E"
-        android:paddingStart="@dimen/_10sdp"
-        android:text="Mật khẩu cũ không chính xác"
-        android:visibility="gone"
-        android:textSize="@dimen/_8ssp"
-        android:fontFamily="@font/inter_light"
-        android:id="@+id/errorMass"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -51,27 +41,17 @@
         android:paddingEnd="@dimen/_10sdp"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/passwordNew"
+            android:id="@+id/quantityProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mật khẩu mới"
+            android:hint="Số lượng sản phẩm"
             android:textSize="@dimen/_15ssp"
             android:fontFamily="@font/inter_light"
             />
     </com.google.android.material.textfield.TextInputLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_8ssp"
-        android:textColor="#E82E2E"
-        android:fontFamily="@font/inter_light"
-        android:text="Mật khẩu phải ít nhất 8 kí tự có 1 chữ hoa , 1 số , 1 ký tự đặc biệt"
-        android:paddingStart="@dimen/_10sdp"
-        android:visibility="gone"
-        android:id="@+id/errorMass2"/>
 
     <Button
-        android:id="@+id/btnUpDataPass"
+        android:id="@+id/btnUpData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20ssp"

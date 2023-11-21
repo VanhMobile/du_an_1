@@ -76,7 +76,7 @@
                     android:ellipsize="end"
                     android:backgroundTint="@android:color/transparent"
                     android:layout_width="match_parent"
-                    android:hint="password"
+                    android:hint="Password"
                     android:inputType="textPassword"
                     android:textColorHint="@color/edt_login_color_hint"
                     android:paddingStart="@dimen/_8sdp"

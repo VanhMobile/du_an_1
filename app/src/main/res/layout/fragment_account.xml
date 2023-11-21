@@ -64,14 +64,14 @@
 
                 android:textSize="@dimen/_13ssp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/nameEmploy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:hint="Nhập tên của bạn"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:textSize="@dimen/_13ssp"
                 android:backgroundTint="@android:color/transparent"/>
             <View

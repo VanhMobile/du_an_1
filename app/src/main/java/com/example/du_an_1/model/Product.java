@@ -1,8 +1,11 @@
 package com.example.du_an_1.model;
 
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Product {
+public class Product implements Serializable {
     private String imgPath;
     private String productId;
     private String productName;
@@ -10,13 +13,23 @@ public class Product {
     private int retailPrice;
     private int wholeSalePrice;
     private int quantity;
-
     private String cate;
     private String properties;
     private String date;
+
+    private String status;
+
     private String note;
 
     public Product() {
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getCate() {
@@ -105,6 +118,12 @@ public class Product {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.getProductName() +" "+ this.getCate();
     }
 
     @Override

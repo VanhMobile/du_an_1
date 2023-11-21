@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.example.du_an_1.R;
 import com.example.du_an_1.adapter.CateProductDialogAdapter;
 import com.example.du_an_1.adapter.ListProductAdapter;
+import com.example.du_an_1.controller.view.DetailProductActivity;
 import com.example.du_an_1.controller.view.ProductActivity;
 import com.example.du_an_1.database.CategoryProductDao;
 import com.example.du_an_1.database.ProductDao;
@@ -38,9 +39,7 @@ import java.util.stream.Collectors;
 public class ListProductsFragment extends Fragment {
 
     private FragmentListProductsBinding productsBinding;
-
     ListProductAdapter productAdapter;
-    ArrayList<CartShop> cartShops;
     Employee employee = AccountSingle.getInstance().getAccount();
 
     public ListProductsFragment() {
@@ -77,21 +76,18 @@ public class ListProductsFragment extends Fragment {
             }
         });
 
-        AddReLoad();
-        productsBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                AddReLoad();
-                productsBinding.swipeRefresh.setRefreshing(false);
-            }
-        });
-    }
-
-    private void AddReLoad() {
         ProductDao.getProducts(employee.getIdShop(), new ProductDao.GetData() {
             @Override
             public void getData(ArrayList<Product> products) {
-                productAdapter = new ListProductAdapter(products, new ListProductAdapter.Click() {
+
+                ArrayList<Product> data = new ArrayList<>();
+
+                for (Product product : products){
+                    if (!product.getStatus().equals("ẩn")){
+                        data.add(product);
+                    }
+                }
+                productAdapter = new ListProductAdapter(data, new ListProductAdapter.Click() {
                     @Override
                     public void clickBtnAdd(Product product) {
                         ArrayList<CartShop> shopArrayList = CartShopSingle.getInstance().getCartShops();
@@ -109,9 +105,9 @@ public class ListProductsFragment extends Fragment {
 
                     @Override
                     public void clickItem(Product product) {
-//                        Intent intent = new Intent(requireContext(), DetailProductActivity.class);
-//                        intent.putExtra("product",product);
-//                        startActivity(intent);
+                        Intent intent = new Intent(requireContext(), DetailProductActivity.class);
+                        intent.putExtra("product",product);
+                        startActivity(intent);
                     }
                 });
 
@@ -144,6 +140,30 @@ public class ListProductsFragment extends Fragment {
                         showDiaLogCatePro(products);
                     }
                 });
+            }
+        });
+
+        productsBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                AddReLoad();
+                productsBinding.swipeRefresh.setRefreshing(false);
+            }
+        });
+    }
+
+    private void AddReLoad() {
+        ProductDao.getProducts(employee.getIdShop(), new ProductDao.GetData() {
+            @Override
+            public void getData(ArrayList<Product> products) {
+                ArrayList<Product> data = new ArrayList<>();
+
+                for (Product product : products){
+                    if (!product.getStatus().equals("ẩn")){
+                        data.add(product);
+                    }
+                }
+                productAdapter.setData(data);
             }
         });
     }
