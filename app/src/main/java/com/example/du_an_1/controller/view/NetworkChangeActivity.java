@@ -1,61 +1,39 @@
 package com.example.du_an_1.controller.view;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkCapabilities;
-import android.net.NetworkRequest;
-import android.widget.Toast;
+import android.net.NetworkInfo;
 
-public class NetworkChangeActivity {
 
-    private Context context;
-    private boolean isFirstLogin = true; // Biến để kiểm tra lần đầu tiên đăng nhập
+public class NetworkChangeActivity extends BroadcastReceiver {
 
-    public NetworkChangeActivity(Context context) {
-        this.context = context;
+    public interface NetworkChangeListener {
+        void onNetworkChanged(boolean isConnected);
     }
 
-    public void startNetworkListener() {
-        ConnectivityManager connectivityManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    private NetworkChangeListener listener;
 
-        if (connectivityManager != null) {
-            NetworkRequest networkRequest = new NetworkRequest.Builder().build();
+    public NetworkChangeActivity(NetworkChangeListener listener) {
+        this.listener = listener;
+    }
 
-            connectivityManager.registerNetworkCallback(networkRequest,
-                    new ConnectivityManager.NetworkCallback() {
-                        @Override
-                        public void onAvailable(Network network) {
-                            super.onAvailable(network);
-                            // Khi có kết nối mạng
-                            if (!isFirstLogin) {
-                                showToast("Kết nối mạng đã trở lại");
-                            }
-                            isFirstLogin = false;
-                        }
-
-                        @Override
-                        public void onLost(Network network) {
-                            super.onLost(network);
-                            // Khi mất kết nối mạng
-                            showToast("Không có kết nối mạng");
-                        }
-
-                        @Override
-                        public void onCapabilitiesChanged(
-                                Network network,
-                                NetworkCapabilities networkCapabilities) {
-                            super.onCapabilitiesChanged(network, networkCapabilities);
-                            // Khi các khả năng của mạng thay đổi
-
-                        }
-                    });
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        if (listener != null) {
+            boolean isConnected = isNetworkAvailable(context);
+            listener.onNetworkChanged(isConnected);
         }
     }
 
-    private void showToast(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    private boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        return false;
     }
 }
 
