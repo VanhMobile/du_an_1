@@ -72,7 +72,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         homeBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        checkNetwork();
         initView();
         return homeBinding.getRoot();
     }
@@ -306,8 +305,4 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         homeBinding.barChart.getXAxis().setGranularityEnabled(true);
     }
 
-    public void checkNetwork (){
-        networkChangeActivity = new NetworkChangeActivity(getContext());
-        networkChangeActivity.startNetworkListener();
-    }
 }

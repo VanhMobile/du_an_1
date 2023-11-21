@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tên sản phẩm"
+            android:maxLines="1"
             android:textSize="@dimen/_15ssp"
             android:fontFamily="@font/inter_light"
             />
@@ -45,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Số lượng sản phẩm"
+            android:maxLines="1"
             android:textSize="@dimen/_15ssp"
             android:fontFamily="@font/inter_light"
             />
