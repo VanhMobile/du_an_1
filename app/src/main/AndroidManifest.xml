@@ -29,6 +29,9 @@
         android:theme="@style/Theme.SallerApp"
         tools:targetApi="31">
         <activity
+            android:name=".controller.view.DetailProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".controller.view.CustomerActivity"
             android:exported="false" />
         <activity
@@ -46,15 +49,12 @@
         <activity
             android:name=".controller.view.ConfirmPasswordActivity"
             android:exported="false" />
-
         <activity
             android:name=".controller.view.OtpConfirmActivity"
             android:exported="false" />
-
         <activity
             android:name=".controller.view.NewPassActivity"
             android:exported="false" />
-
         <activity
             android:name=".controller.view.WellComeActivity"
             android:exported="true">
@@ -68,7 +68,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-5261855707351600~3458992185" />

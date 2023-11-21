@@ -26,12 +26,14 @@ import com.example.du_an_1.model.Employee;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 
+import java.util.ArrayList;
+
 
 public class AddCategoryProductFragment extends Fragment {
     private static final String COUNT_KEY="count_key";
-
-
     private FragmentAddCategoryProductBinding categoryProductBinding;
+    AccountSingle accountSingle=AccountSingle.getInstance();
+    Employee employee= accountSingle.getAccount();
     public AddCategoryProductFragment() {
         // Required empty public constructor
     }
@@ -88,36 +90,21 @@ public class AddCategoryProductFragment extends Fragment {
         String edtNote=categoryProductBinding.edtGhiChu.getText().toString();
 
         if (!Validations.isEmptyPress(categoryProductBinding.edtTenDanhMuc)){
-            String mID=generateNextID(getContext(), "LSP_");
-            CategoryProductBuilder categoryProductBuilder=new CategoryProductBuilder();
-            CategoryProduct categoryProduct=categoryProductBuilder.addName(nameCategoryProduct)
-                    .addNote(edtNote)
-                    .addId(mID)
-                    .build();
+            CategoryProductDao.getCategoryProduct(employee.getIdShop(), new CategoryProductDao.GetData() {
+                @Override
+                public void getData(ArrayList<CategoryProduct> categoryProducts) {
+                    String mID = IdGenerator.generateNextShopId(categoryProducts.size(), "LSP_");
+                    CategoryProductBuilder categoryProductBuilder = new CategoryProductBuilder();
+                    CategoryProduct categoryProduct = categoryProductBuilder.addName(nameCategoryProduct)
+                            .addNote(edtNote)
+                            .addId(mID)
+                            .build();
 
-            AccountSingle accountSingle=AccountSingle.getInstance();
-            Employee employee= accountSingle.getAccount();
-            CategoryProductDao.insertCategoryProduct(categoryProduct, employee.getIdShop());
-            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    CategoryProductDao.insertCategoryProduct(categoryProduct, employee.getIdShop());
+                    Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
-    }
-
-    public static String generateNextID(Context context, String s){
-        int count=getNextCount(context);
-        String id=s+ count;
-        saveNextCount(context, count+1);
-        return id;
-    }
-
-    private static int getNextCount(Context context){
-        SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getInt(COUNT_KEY, 1);
-    }
-
-    private static void saveNextCount(Context context, int count){
-        SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putInt(COUNT_KEY, count);
-        editor.commit();
     }
 }

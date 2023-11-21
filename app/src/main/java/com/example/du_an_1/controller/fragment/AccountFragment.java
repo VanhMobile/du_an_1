@@ -67,7 +67,6 @@ public class AccountFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent=new Intent(getContext(), LoginActivity.class);
                         startActivity(intent);
-                        resetData();
                     }
                 });
                 builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
@@ -141,41 +140,22 @@ public class AccountFragment extends Fragment {
         accountBinding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int count = 0;
-
-                if (Validations.isEmptyPress(accountBinding.nameEmploy)){
-                    count ++;
-                }
-
-                if (!Validations.isEmptyPress(accountBinding.emailEmploy)){
-                    if (!Validations.isEmailPress(accountBinding.emailEmploy)){
-                        count ++;
+                AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                builder.setTitle("Thông báo");
+                builder.setMessage("Bạn muốn cập nhập lại thông tin cá nhân ?");
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        upDataInforEmployee();
                     }
-                }else{
-                    count ++;
-                }
-
-                if (!Validations.isEmptyPress(accountBinding.emailEmploy)){
-                    if (!Validations.isPhoneNumberPress(accountBinding.phoneNumberEmploy)){
-                        count ++;
+                });
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                     }
-                }else{
-                    count ++;
-                }
-
-                if (count != 0){
-                    return;
-                }
-
-                String nameShop =  accountBinding.nameEmploy.getText().toString().trim();
-                String emailShop = accountBinding.emailEmploy.getText().toString().trim();
-                String numberPhone = accountBinding.phoneNumberEmploy.getText().toString().trim();
-
-                employee.setName(nameShop);
-                employee.setEmail(emailShop);
-                employee.setNumberPhone(numberPhone);
-
-                EmployeeDao.insertEmployee(employee);
+                });
+                builder.show();
             }
         });
 
@@ -183,9 +163,37 @@ public class AccountFragment extends Fragment {
         accountBinding.emailEmploy.setText(employee.getEmail());
         accountBinding.phoneNumberEmploy.setText(employee.getNumberPhone());
     }
-    private void resetData(){
-        accountBinding.nameEmploy.setText("");
-        accountBinding.emailEmploy.setText("");
-        accountBinding.phoneNumberEmploy.setText("");
+
+    private void upDataInforEmployee() {
+        int count = 0;
+
+        if (!Validations.isEmptyPress(accountBinding.emailEmploy)){
+            if (!Validations.isEmailPress(accountBinding.emailEmploy)){
+                count ++;
+            }
+        }else{
+            count ++;
+        }
+
+        if (!Validations.isEmptyPress(accountBinding.phoneNumberEmploy)){
+            if (!Validations.isPhoneNumberPress(accountBinding.phoneNumberEmploy)){
+                count ++;
+            }
+        }else{
+            count ++;
+        }
+
+        if (count != 0){
+            return;
+        }
+
+        String emailShop = accountBinding.emailEmploy.getText().toString().trim();
+        String numberPhone = accountBinding.phoneNumberEmploy.getText().toString().trim();
+
+        employee.setEmail(emailShop);
+        employee.setNumberPhone(numberPhone);
+
+        EmployeeDao.insertEmployee(employee);
     }
+
 }

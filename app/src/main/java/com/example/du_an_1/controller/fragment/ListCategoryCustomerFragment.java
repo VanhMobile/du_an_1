@@ -69,7 +69,17 @@ public class ListCategoryCustomerFragment extends Fragment {
                 (customerBinding.getRoot().getContext(),DividerItemDecoration.VERTICAL);
         customerBinding.recListCategoryCus.addItemDecoration(dividerItemDecoration);
 
-        reaLoad();
+        CategoryCustomerDao.getCategoryCustomers(employee.getIdShop(), new CategoryCustomerDao.GetData() {
+            @Override
+            public void getData(ArrayList<CategoryCustomer> categoryCustomers) {
+                if (adapter== null){
+                    adapter=new ListCategoryCustomerAdapter(categoryCustomers);
+                    customerBinding.recListCategoryCus.setAdapter(adapter);
+                }else {
+                    adapter.updateCategoryCus(categoryCustomers);
+                }
+            }
+        });
 
         customerBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -114,16 +124,11 @@ public class ListCategoryCustomerFragment extends Fragment {
     }
 
     private void reaLoad() {
-        CategoryCustomerDao.getCategoryCustomers(employee.getIdShop(), new CategoryCustomerDao.GetData() {
-            @Override
-            public void getData(ArrayList<CategoryCustomer> categoryCustomers) {
-                if (adapter== null){
-                    adapter=new ListCategoryCustomerAdapter(categoryCustomers);
-                    customerBinding.recListCategoryCus.setAdapter(adapter);
-                }else {
-                    adapter.updateCategoryCus(categoryCustomers);
-                }
-            }
-        });
+       CategoryCustomerDao.getCategoryCustomers(employee.getIdShop(), new CategoryCustomerDao.GetData() {
+           @Override
+           public void getData(ArrayList<CategoryCustomer> categoryCustomers) {
+               adapter.updateCategoryCus(categoryCustomers);
+           }
+       });
     }
 }

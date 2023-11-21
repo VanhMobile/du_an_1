@@ -74,8 +74,7 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
     // Định dạng ngày
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    ProgressDialog progressDialog;
-
+    ArrayList<Product> data;
 
     public AddProductFragment() {
         // Required empty public constructor
@@ -111,6 +110,15 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
                 if (RequestPermissions.requestReadImgGalleryCamera(requireContext())) {
                     showDialog();
                 }
+            }
+        });
+
+        data = new ArrayList<>();
+        ProductDao.getProducts(employee.getIdShop(), new ProductDao.GetData() {
+            @Override
+            public void getData(ArrayList<Product> products) {
+                data.clear();
+                data.addAll(products);
             }
         });
 
@@ -152,32 +160,6 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
             }
         });
 
-        ProductDao.getProducts(employee.getIdShop(), new ProductDao.GetData() {
-            @Override
-            public void getData(ArrayList<Product> products) {
-                productBinding.edtProductId.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        products.forEach(o -> {
-                            String[] id = o.getProductId().split("_");
-                            if (id[0].equals(charSequence.toString())){
-                                productBinding.edtProductId.setError("ID sản phẩm không thể trùng");
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-
-                    }
-                });
-            }
-        });
         productBinding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -231,6 +213,13 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
             }
         }else {
             count ++;
+        }
+
+        for (Product product : data){
+            if (product.getProductId().equals(productBinding.edtProductId.getText().toString())){
+                count ++;
+                Toast.makeText(requireContext(),"Id sản phẩm trùng",Toast.LENGTH_SHORT).show();
+            }
         }
 
         if (count != 0){
@@ -287,6 +276,7 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
                     .addQuantity(quantity)
                     .addCategory(categoryPro)
                     .addDate(dateTime)
+                    .addStatus("hiện")
                     .addNote(note)
                     .build();
             ProductDao.insertProduct(product, employee.getIdShop());
@@ -313,16 +303,10 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
                         .addQuantity(quantity)
                         .addCategory(categoryPro)
                         .addDate(dateTime)
+                        .addStatus("hiện")
                         .addNote(note)
                         .build();
                 ProductDao.insertProduct(product, employee.getIdShop());
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(requireActivity(),"Thêm thành công",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                thread.start();
             }
             clearData();
         }
@@ -336,7 +320,7 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
         productBinding.edtRetailProduct.setText("");
         productBinding.edtWholeSalePriceProduct.setText("");
         productBinding.edtQuantityProduct.setText("");
-        productBinding.tvCategoryProduct.setText("Chọn loại hang hóa");
+        productBinding.tvCategoryProduct.setText("Chọn loại hàng hóa");
         productBinding.addImgProduct.setVisibility(View.VISIBLE);
         productBinding.imgProduct.setVisibility(View.GONE);
         productBinding.date.setText(dateFormat.format(today));
@@ -400,6 +384,11 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
                 int quantityAttPro = Integer.parseInt(attributeProductBinding.quantity.getText().toString());
                 AttributeProduct attributeProduct = new AttributeProduct(nameAttPro,quantityAttPro);
                 attributeProducts.add(attributeProduct);
+                int SumQuantity = 0;
+                for (AttributeProduct attrB : attributeProducts){
+                    SumQuantity += attrB.getQuantity();
+                }
+                productBinding.edtQuantityProduct.setText(SumQuantity+"");
                 attributeProductAdapter.notifyDataSetChanged();
                 dialogAtt.dismiss();
             }
@@ -489,6 +478,11 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
     public void delete(AttributeProduct attributeProduct) {
         attributeProducts.remove(attributeProduct);
         attributeProductAdapter.notifyDataSetChanged();
+        int SumQuantity = 0;
+        for (AttributeProduct attrB : attributeProducts){
+            SumQuantity += attrB.getQuantity();
+        }
+        productBinding.edtQuantityProduct.setText(SumQuantity+"");
         Toast.makeText(requireContext(),"xóa thành công",Toast.LENGTH_SHORT).show();
     }
 }
