@@ -67,6 +67,7 @@ public class AccountFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent=new Intent(getContext(), LoginActivity.class);
                         startActivity(intent);
+                        requireActivity().finish();
                     }
                 });
                 builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {

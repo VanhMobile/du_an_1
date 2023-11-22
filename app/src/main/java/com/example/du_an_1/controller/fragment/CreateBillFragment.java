@@ -195,7 +195,7 @@ public class CreateBillFragment extends Fragment {
                         .addTotalPrice(CartShopSingle.getInstance().SumPrice(createBillBinding.tablePrice.getText().toString()))
                         .addDate(dateFormat.format(today))
                         .addNote(createBillBinding.edtNote.getText().toString())
-                        .addIdAccount(employee.getName() + "-" + employee.getNumberPhone())
+                        .addIdAccount(employee.getIdEmployee())
                         .build();
                 CartShopSingle.getInstance().getCartShops().forEach(o -> {
                     int quantity = o.getProduct().getQuantity() - o.getQuantity();

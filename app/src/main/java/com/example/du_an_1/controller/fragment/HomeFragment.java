@@ -207,7 +207,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 bill30.clear();
 
                 bills.forEach(o -> {
-                    if (o.getIdAccount().equals(employee.getName()+"-"+employee.getNumberPhone())){
+                    if (o.getIdAccount().equals(employee.getIdEmployee())){
                         bill30.add(o);
                     }
                 });
@@ -233,7 +233,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 billNow.clear();
 
                 bills.forEach(o -> {
-                    if (o.getIdAccount().equals(employee.getName()+"-"+employee.getNumberPhone())){
+                    if (o.getIdAccount().equals(employee.getIdEmployee())){
                         billNow.add(o);
                     }
                 });
