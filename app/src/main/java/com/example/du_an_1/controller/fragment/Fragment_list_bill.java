@@ -119,7 +119,7 @@ public class Fragment_list_bill extends Fragment {
             @Override
             public void getData(ArrayList<Bill> bills) {
                 bills.forEach(o -> {
-                    if (o.getIdAccount().equals(employee.getName()+"-"+employee.getNumberPhone())){
+                    if (o.getIdAccount().equals(employee.getIdEmployee())){
                         billArrayList.add(o);
                     }
                 });

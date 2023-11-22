@@ -13,10 +13,15 @@ import android.view.ViewGroup;
 
 import com.example.du_an_1.MainActivity;
 import com.example.du_an_1.adapter.DetailBillAdapter;
+import com.example.du_an_1.database.EmployeeDao;
 import com.example.du_an_1.databinding.FragmentDetailBillBinding;
 import com.example.du_an_1.desgin_pattern.single_pantter.BillSingle;
 import com.example.du_an_1.funtions.MoneyFormat;
 import com.example.du_an_1.model.Bill;
+import com.example.du_an_1.model.Employee;
+
+import java.util.ArrayList;
+import java.util.EnumMap;
 
 
 public class DetailBillFragment extends Fragment {
@@ -62,7 +67,16 @@ public class DetailBillFragment extends Fragment {
         detailBillBinding.typeBill.setText(bill.getBillType());
         DetailBillAdapter billAdapter  = new DetailBillAdapter(bill.getListProduct(), bill.getBillType());
         detailBillBinding.recycBill.setAdapter(billAdapter);
-        detailBillBinding.IdAccount.setText(bill.getIdAccount());
+        EmployeeDao.getEmployees(new EmployeeDao.GetData() {
+            @Override
+            public void getData(ArrayList<Employee> employees) {
+                for (Employee employee : employees){
+                    if (employee.getIdEmployee().equals(bill.getIdAccount())){
+                        detailBillBinding.IdAccount.setText(employee.getName()+"_"+employee.getNumberPhone());
+                    }
+                }
+            }
+        });
         detailBillBinding.recycBill.setLayoutManager(new LinearLayoutManager(requireActivity()));
     }
 }
