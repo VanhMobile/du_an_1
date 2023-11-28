@@ -61,17 +61,16 @@
                 android:fontFamily="@font/inter_light"
                 android:text="Tên nhân viên"
                 android:textColor="@color/line"
-
                 android:textSize="@dimen/_13ssp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/nameEmploy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:hint="Tên nhân viên"
                 android:textSize="@dimen/_13ssp"
                 android:backgroundTint="@android:color/transparent"/>
             <View
@@ -101,7 +100,6 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:hint="abc123@gamil.com"
-
                 android:textSize="@dimen/_13ssp"
                 android:backgroundTint="@android:color/transparent"/>
             <View

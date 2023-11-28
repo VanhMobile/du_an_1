@@ -73,7 +73,7 @@ public class CategoryProductFragment extends Fragment {
         CategoryProductDao.getCategoryProduct(employee.getIdShop(), new CategoryProductDao.GetData() {
             @Override
             public void getData(ArrayList<CategoryProduct> categoryProducts) {
-                if (adapter== null){
+                if (adapter == null){
                     adapter=new ListCategoryProductAdapter(categoryProducts);
                     cateProBinding.rcvCatePro.setAdapter(adapter);
                 }else {

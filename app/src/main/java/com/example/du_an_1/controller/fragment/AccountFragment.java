@@ -166,35 +166,64 @@ public class AccountFragment extends Fragment {
     }
 
     private void upDataInforEmployee() {
-        int count = 0;
+        EmployeeDao.getEmployees(employee.getIdShop(), new EmployeeDao.GetData() {
+            @Override
+            public void getData(ArrayList<Employee> employees) {
+                int count = 0;
 
-        if (!Validations.isEmptyPress(accountBinding.emailEmploy)){
-            if (!Validations.isEmailPress(accountBinding.emailEmploy)){
-                count ++;
+                if (Validations.isEmptyPress(accountBinding.nameEmploy)){
+                    count ++;
+                }
+
+                if (!Validations.isEmptyPress(accountBinding.emailEmploy)){
+                    if (!Validations.isEmailPress(accountBinding.emailEmploy)){
+                        count ++;
+                    }
+                }else{
+                    count ++;
+                }
+
+                if (!Validations.isEmptyPress(accountBinding.phoneNumberEmploy)){
+                    if (!Validations.isPhoneNumberPress(accountBinding.phoneNumberEmploy)){
+                        count ++;
+                    }
+                }else{
+                    count ++;
+                }
+
+                for (int i = 0; i < employees.size(); i++){
+                    if (!employees.get(i).getIdEmployee().equals(employee.getIdEmployee())){
+                        if (employees.get(i).getNumberPhone().equals(accountBinding.phoneNumberEmploy.getText().toString().trim())){
+                            count++;
+                            Toast.makeText(requireActivity(),"Số điện thoại đã có",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                for (int i = 0; i < employees.size(); i++){
+                    if (!employees.get(i).getIdEmployee().equals(employee.getIdEmployee())){
+                        if (employees.get(i).getEmail().equals(accountBinding.emailEmploy.getText().toString())){
+                            count++;
+                            Toast.makeText(requireActivity(),"Email đã có",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                if (count != 0){
+                    return;
+                }
+
+                String nameEmployee = accountBinding.nameEmploy.getText().toString().trim();
+                String emailShop = accountBinding.emailEmploy.getText().toString().trim();
+                String numberPhone = accountBinding.phoneNumberEmploy.getText().toString().trim();
+
+                employee.setName(nameEmployee);
+                employee.setEmail(emailShop);
+                employee.setNumberPhone(numberPhone);
+
+                EmployeeDao.insertEmployee(employee);
             }
-        }else{
-            count ++;
-        }
-
-        if (!Validations.isEmptyPress(accountBinding.phoneNumberEmploy)){
-            if (!Validations.isPhoneNumberPress(accountBinding.phoneNumberEmploy)){
-                count ++;
-            }
-        }else{
-            count ++;
-        }
-
-        if (count != 0){
-            return;
-        }
-
-        String emailShop = accountBinding.emailEmploy.getText().toString().trim();
-        String numberPhone = accountBinding.phoneNumberEmploy.getText().toString().trim();
-
-        employee.setEmail(emailShop);
-        employee.setNumberPhone(numberPhone);
-
-        EmployeeDao.insertEmployee(employee);
+        });
     }
 
 }
