@@ -82,6 +82,37 @@
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:background="@color/line"/>
 
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:src="@drawable/icon_shop"/>
+        <EditText
+            android:id="@+id/idShop"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:hint="Shop id"
+            android:textColorHint="@color/edt_login_color_hint"
+            android:paddingStart="@dimen/_8sdp"
+            android:textSize="@dimen/_10ssp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:background="@color/line"/>
+
     <TextView
         android:id="@+id/txtRemember"
         android:layout_width="match_parent"

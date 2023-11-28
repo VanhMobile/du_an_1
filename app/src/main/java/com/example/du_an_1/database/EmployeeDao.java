@@ -55,6 +55,31 @@ public class EmployeeDao {
         });
     }
 
+    public static void getEmployees(String idShopAccount,GetData data){
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        ArrayList<Employee> employees = new ArrayList<>();
+        db.child(idShopAccount).child("Employees").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        Employee employee = dataSnapshot.getValue(Employee.class);
+                        employees.add(employee);
+                        Log.e(TAG,employee.getIdEmployee());
+                    }
+                }else{
+                    Log.e(TAG,"không có dữ liệu trong Employees");
+                }
+                data.getData(employees);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG,"ko thể đọc dữ liệu db: " + error);
+            }
+        });
+    }
+
     public interface GetData{
         void getData(ArrayList<Employee> employees);
     }

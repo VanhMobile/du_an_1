@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private void initView() {
         Validations.isEmpty(loginBinding.userName);
         Validations.isEmpty(loginBinding.password);
+        Validations.isEmpty(loginBinding.idShop);
 
         loginBinding.txtRemember.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,21 +62,26 @@ public class LoginActivity extends AppCompatActivity {
                     count ++;
                 }
 
+                if (Validations.isEmptyPress(loginBinding.idShop)){
+                    count++;
+                }
+
                 if (count != 0){
                     return;
                 }
 
                 // sử lý logic login ở đây
-                EmployeeDao.getEmployees(new EmployeeDao.GetData() {
+                EmployeeDao.getEmployees(loginBinding.idShop.getText().toString().trim(),new EmployeeDao.GetData() {
                     // đọc dữ liệu từ fire base ra
                     @Override
                     public void getData(ArrayList<Employee> employees) {
                         String numberPhone = loginBinding.userName.getText().toString();
-                        String pass=loginBinding.password.getText().toString();
+                        String pass = loginBinding.password.getText().toString();
                         boolean checkLogin=false;
 
                         for (Employee item: employees) {
-                            if (((item.getNumberPhone().equals(numberPhone))|| (item.getEmail().equals(numberPhone)))&&(item.getPassword().equals(pass))){
+                            if (((item.getNumberPhone().equals(numberPhone))|| (item.getEmail().equals(numberPhone)))
+                                    && (item.getPassword().equals(pass))){
                                 AccountSingle.getInstance().setAccount(item);
                                 Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));

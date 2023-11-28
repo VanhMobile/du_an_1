@@ -47,13 +47,12 @@ public class Fragment_list_bill extends Fragment {
     private void initView() {
         AdRequest adRequest = new AdRequest.Builder().build();
         binding.adView.loadAd(adRequest);
-
         billArrayList = new ArrayList<>();
         BillDao.GetBills(employee.getIdShop(), new BillDao.GetData() {
             @Override
             public void getData(ArrayList<Bill> bills) {
                 bills.forEach(o -> {
-                    if (o.getIdAccount().equals(employee.getName()+"-"+employee.getNumberPhone())){
+                    if (o.getIdAccount().equals(employee.getIdEmployee())){
                         billArrayList.add(o);
                     }
                 });
@@ -67,13 +66,13 @@ public class Fragment_list_bill extends Fragment {
                         startActivity(intent);
                     }
                 });
+                binding.recyclerViewListBill.setAdapter(adapter);
                 // Áp dụng DividerItemDecoration cho RecyclerView
                 if (isAdded()){
                     LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
                     DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireContext(),
                             layoutManager.getOrientation());
                     binding.recyclerViewListBill.addItemDecoration(dividerItemDecoration);
-                    binding.recyclerViewListBill.setAdapter(adapter);
                     binding.recyclerViewListBill.setLayoutManager(layoutManager);
                 }
                 binding.searchView.addTextChangedListener(new TextWatcher() {
@@ -114,7 +113,7 @@ public class Fragment_list_bill extends Fragment {
     }
 
     private void addReload() {
-        billArrayList = new ArrayList<>();
+        billArrayList.clear();
         BillDao.GetBills(employee.getIdShop(), new BillDao.GetData() {
             @Override
             public void getData(ArrayList<Bill> bills) {
