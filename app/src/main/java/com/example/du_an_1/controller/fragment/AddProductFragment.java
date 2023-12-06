@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -66,7 +67,7 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
     private static final String TAG = AddProductFragment.class.getSimpleName();
     Bitmap imageBitmap;
     BottomSheetDialog dialog;
-    ArrayList<AttributeProduct> attributeProducts ;
+    ArrayList<AttributeProduct> attributeProducts;
     AttributeProductAdapter attributeProductAdapter;
     Employee employee = AccountSingle.getInstance().getAccount();
 
@@ -101,7 +102,7 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
         attributeProducts = new ArrayList<>();
         AdRequest adRequest = new AdRequest.Builder().build();
         productBinding.adView.loadAd(adRequest);
-        attributeProductAdapter = new AttributeProductAdapter(attributeProducts,this);
+        attributeProductAdapter = new AttributeProductAdapter(attributeProducts, this);
         productBinding.recListAttPro.setAdapter(attributeProductAdapter);
         productBinding.recListAttPro.setLayoutManager(new LinearLayoutManager(requireContext()));
         productBinding.addImgProduct.setOnClickListener(new View.OnClickListener() {
@@ -176,60 +177,65 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
 
     private void insertProd() {
         int count = 0;
-        if (Validations.isEmptyPress(productBinding.edtProductId)){
-            count ++;
+        if (Validations.isEmptyPress(productBinding.edtProductId)) {
+            count++;
         }
 
-        if (Validations.isEmptyPress(productBinding.edtNameProduct)){
-            count ++;
+        if (Validations.isEmptyPress(productBinding.edtNameProduct)) {
+            count++;
         }
-        if(!Validations.isEmptyPress(productBinding.edtProductCost)){
-            if (!Validations.isQuantityPress(productBinding.edtProductCost)){
-                count ++;
+        if (!Validations.isEmptyPress(productBinding.edtProductCost)) {
+            if (!Validations.isQuantityPress(productBinding.edtProductCost)) {
+                count++;
             }
-        }else {
-            count ++;
+        } else {
+            count++;
         }
 
-        if(!Validations.isEmptyPress(productBinding.edtRetailProduct)){
-            if (!Validations.isQuantityPress(productBinding.edtRetailProduct)){
-                count ++;
+        if (!Validations.isEmptyPress(productBinding.edtRetailProduct)) {
+            if (!Validations.isQuantityPress(productBinding.edtRetailProduct)) {
+                count++;
             }
-        }else {
-            count ++;
+        } else {
+            count++;
         }
 
-        if(!Validations.isEmptyPress(productBinding.edtWholeSalePriceProduct)){
-            if (!Validations.isQuantityPress(productBinding.edtWholeSalePriceProduct)){
-                count ++;
+        if (!Validations.isEmptyPress(productBinding.edtWholeSalePriceProduct)) {
+            if (!Validations.isQuantityPress(productBinding.edtWholeSalePriceProduct)) {
+                count++;
             }
-        }else {
-            count ++;
+        } else {
+            count++;
         }
 
-        if(!Validations.isEmptyPress(productBinding.edtQuantityProduct)){
-            if (!Validations.isQuantityPress(productBinding.edtQuantityProduct)){
-                count ++;
+        if (!Validations.isEmptyPress(productBinding.edtQuantityProduct)) {
+            if (!Validations.isQuantityPress(productBinding.edtQuantityProduct)) {
+                count++;
             }
-        }else {
-            count ++;
+        } else {
+            count++;
         }
 
-        for (Product product : data){
-            if (product.getProductId().equals(productBinding.edtProductId.getText().toString())){
-                count ++;
-                Toast.makeText(requireContext(),"Id sản phẩm trùng",Toast.LENGTH_SHORT).show();
+        for (Product product : data) {
+            if (product.getProductId().equals(productBinding.edtProductId.getText().toString())) {
+                count++;
+                Toast.makeText(requireContext(), "Id sản phẩm trùng", Toast.LENGTH_SHORT).show();
             }
         }
 
-        if (count != 0){
+        if (productBinding.tvCategoryProduct.getText().toString().equals("Chọn loại hàng hóa")) {
+            Toast.makeText(requireActivity(), "Loại sản phận rỗng", Toast.LENGTH_SHORT).show();
+            count++;
+        }
+
+        if (count != 0) {
             return;
         }
 
-        if (imageBitmap != null){
+        if (imageBitmap != null) {
             StorageReference sdb = FirebaseStorage.getInstance().getReference().child(productBinding.edtProductId.getText().toString());
             ByteArrayOutputStream ops = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,ops);
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, ops);
             byte[] imgData = ops.toByteArray();
 
             UploadTask uploadTask = sdb.putBytes(imgData);
@@ -248,14 +254,14 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
                 }
             });
 
-        }else {
+        } else {
             createPro("");
-            Toast.makeText(requireContext(),"Thêm sản phẩm thành công",Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void createPro(String imgPath) {
-        if (attributeProducts.isEmpty()){
+        if (attributeProducts.isEmpty()) {
             String idPro = productBinding.edtProductId.getText().toString();
             String namePro = productBinding.edtNameProduct.getText().toString();
             int cost = Integer.parseInt(productBinding.edtProductCost.getText().toString());
@@ -281,10 +287,10 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
                     .build();
             ProductDao.insertProduct(product, employee.getIdShop());
             clearData();
-        }else {
-            for (int i = 0; i < attributeProducts.size(); i++){
-                String idPro = productBinding.edtProductId.getText().toString() + "_BT_"+i;
-                String namePro = productBinding.edtNameProduct.getText().toString()+ " " + attributeProducts.get(i).getAttribute();
+        } else {
+            for (int i = 0; i < attributeProducts.size(); i++) {
+                String idPro = productBinding.edtProductId.getText().toString() + "_BT_" + i;
+                String namePro = productBinding.edtNameProduct.getText().toString() + " " + attributeProducts.get(i).getAttribute();
                 int cost = Integer.parseInt(productBinding.edtProductCost.getText().toString());
                 int retailPrice = Integer.parseInt(productBinding.edtRetailProduct.getText().toString());
                 int wholeSalePrice = Integer.parseInt(productBinding.edtWholeSalePriceProduct.getText().toString());
@@ -366,29 +372,29 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
             @Override
             public void onClick(View view) {
                 int count = 0;
-                if (Validations.isEmptyPress(attributeProductBinding.name)){
-                    count ++;
+                if (Validations.isEmptyPress(attributeProductBinding.name)) {
+                    count++;
                 }
-                if (!Validations.isEmptyPress(attributeProductBinding.name)){
-                    if (!Validations.isQuantityPress(attributeProductBinding.quantity)){
-                        count ++;
+                if (!Validations.isEmptyPress(attributeProductBinding.name)) {
+                    if (!Validations.isQuantityPress(attributeProductBinding.quantity)) {
+                        count++;
                     }
-                }else{
-                    count ++;
+                } else {
+                    count++;
                 }
-                if (count != 0){
+                if (count != 0) {
                     return;
                 }
 
                 String nameAttPro = attributeProductBinding.name.getText().toString();
                 int quantityAttPro = Integer.parseInt(attributeProductBinding.quantity.getText().toString());
-                AttributeProduct attributeProduct = new AttributeProduct(nameAttPro,quantityAttPro);
+                AttributeProduct attributeProduct = new AttributeProduct(nameAttPro, quantityAttPro);
                 attributeProducts.add(attributeProduct);
                 int SumQuantity = 0;
-                for (AttributeProduct attrB : attributeProducts){
+                for (AttributeProduct attrB : attributeProducts) {
                     SumQuantity += attrB.getQuantity();
                 }
-                productBinding.edtQuantityProduct.setText(SumQuantity+"");
+                productBinding.edtQuantityProduct.setText(SumQuantity + "");
                 attributeProductAdapter.notifyDataSetChanged();
                 dialogAtt.dismiss();
             }
@@ -451,6 +457,7 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
 
         dialog.show();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -474,15 +481,16 @@ public class AddProductFragment extends Fragment implements AttributeProductAdap
             }
         }
     }
+
     @Override
     public void delete(AttributeProduct attributeProduct) {
         attributeProducts.remove(attributeProduct);
         attributeProductAdapter.notifyDataSetChanged();
         int SumQuantity = 0;
-        for (AttributeProduct attrB : attributeProducts){
+        for (AttributeProduct attrB : attributeProducts) {
             SumQuantity += attrB.getQuantity();
         }
-        productBinding.edtQuantityProduct.setText(SumQuantity+"");
-        Toast.makeText(requireContext(),"xóa thành công",Toast.LENGTH_SHORT).show();
+        productBinding.edtQuantityProduct.setText(SumQuantity + "");
+        Toast.makeText(requireContext(), "xóa thành công", Toast.LENGTH_SHORT).show();
     }
 }
